@@ -1,0 +1,3 @@
+---
+nextcloud::system_group: 'www-data'
+nextcloud::system_user: 'www-data'

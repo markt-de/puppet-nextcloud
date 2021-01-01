@@ -1,0 +1,51 @@
+---
+nextcloud::admin_password: ~
+nextcloud::admin_user: 'admin'
+nextcloud::apps: {}
+nextcloud::command_timeout: 7200
+nextcloud::config:
+  trusted_domains:
+    - 'localhost'
+    - "%{facts.networking.fqdn}"
+  filelocking.enabled: true
+nextcloud::cronjobs:
+  'Nextcloud background job':
+    command: "php -f %%{}s/cron.php"
+    minute: '*/5'
+nextcloud::datadir: '/opt/nextcloud-data'
+nextcloud::db_driver: 'mysql'
+nextcloud::db_host: 'localhost'
+nextcloud::db_name: 'nextcloud'
+nextcloud::db_password: ~
+nextcloud::db_user: 'nextcloud'
+nextcloud::debug: false
+nextcloud::install_enabled: true
+nextcloud::installroot: '/opt'
+nextcloud::manage_apps: true
+nextcloud::manage_cron: true
+nextcloud::manage_php: false
+nextcloud::manage_redis: false
+nextcloud::manage_symlink: true
+nextcloud::mirror: 'https://download.nextcloud.com/server/releases'
+nextcloud::path: '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin'
+nextcloud::php_extensions:
+  bcmath: {}
+  curl: {}
+  dba: {}
+  gd: {}
+  gmp: {}
+  intl: {}
+  json: {}
+  ldap: {}
+  mbstring: {}
+  mysqlnd: {}
+  opcache: {}
+  pdo: {}
+  process: {}
+  readline: {}
+  xml: {}
+  zip: {}
+nextcloud::statefile: '/var/db/nextcloud_home'
+nextcloud::symlink_name: 'nextcloud'
+nextcloud::update_enabled: true
+nextcloud::version: ~

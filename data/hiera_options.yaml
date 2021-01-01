@@ -1,0 +1,5 @@
+---
+lookup_options:
+  "^nextcloud::.*":
+    merge:
+      strategy: deep

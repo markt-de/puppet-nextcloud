@@ -1,0 +1,3 @@
+---
+nextcloud::system_group: 'apache'
+nextcloud::system_user: 'apache'
