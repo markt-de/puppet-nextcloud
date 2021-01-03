@@ -9,9 +9,6 @@ class nextcloud::update {
     # Get and prepare the distribution files
     nextcloud::install::distribution { "update to ${nextcloud::version}": }
 
-    # TODO: verify that 3rd-party apps are still available (or reinstalled) after performing an update
-    # TODO: $apps_update_enabled could be used to automatically update apps after completing a nextcloud update
-
     # Only run occ commands if allowed to do so.
     if ($nextcloud::update_enabled == true) {
       # Commands and files required when performing an update.

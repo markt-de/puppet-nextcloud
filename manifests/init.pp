@@ -1,7 +1,7 @@
 # @summary Install and manage Nextcloud
 #
 # @param admin_password
-#   Specifies the (initial) password for the Nextcloud admin user.
+#   Specifies the initial password for the Nextcloud admin user.
 #
 # @param admin_user
 #   Specifies the username for the Nextcloud admin.

@@ -39,7 +39,7 @@ The following parameters are available in the `nextcloud` class.
 
 Data type: `String`
 
-Specifies the (initial) password for the Nextcloud admin user.
+Specifies the initial password for the Nextcloud admin user.
 
 ##### `admin_user`
 
