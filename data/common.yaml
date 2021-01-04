@@ -13,6 +13,7 @@ nextcloud::cronjobs:
     command: "php -f %%{}s/cron.php"
     minute: '*/5'
 nextcloud::datadir: '/opt/nextcloud-data'
+nextcloud::datastatefile: '/var/db/nextcloud_data'
 nextcloud::db_driver: 'mysql'
 nextcloud::db_host: 'localhost'
 nextcloud::db_name: 'nextcloud'

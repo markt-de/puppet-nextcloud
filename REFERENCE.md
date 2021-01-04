@@ -81,6 +81,13 @@ Data type: `Stdlib::Compat::Absolute_path`
 Specifies the directory where Nextcloud will store user data.
 It MUST reside outside of Nextcloud's installation directory.
 
+##### `datastatefile`
+
+Data type: `Stdlib::Compat::Absolute_path`
+
+A file that is required by the module to work properly. This value MUST NOT
+be changed, because the path is hardcoded in several places.
+
 ##### `debug`
 
 Data type: `Boolean`
@@ -304,8 +311,8 @@ The following parameters are available in the `nextcloud::install::distribution`
 Data type: `Optional[String]`
 
 An optional identifier that can be used to prevent the archive job from
-running under certain conditions. This is most useful to distinguish between
-an initial install and update.
+being executed multiple times by remembering its state. This is most useful
+to distinguish between an initial install and an update.
 
 Default value: ``undef``
 

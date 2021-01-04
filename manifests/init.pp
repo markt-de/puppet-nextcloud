@@ -25,6 +25,10 @@
 #   Specifies the directory where Nextcloud will store user data.
 #   It MUST reside outside of Nextcloud's installation directory.
 #
+# @param datastatefile
+#   A file that is required by the module to work properly. This value MUST NOT
+#   be changed, because the path is hardcoded in several places.
+#
 # @param debug
 #   Whether to enable additional output for debugging purposes.
 #
@@ -103,6 +107,7 @@ class nextcloud (
   Hash $config,
   Hash $cronjobs,
   Stdlib::Compat::Absolute_path $datadir,
+  Stdlib::Compat::Absolute_path $datastatefile,
   String $db_driver,
   String $db_host,
   String $db_name,

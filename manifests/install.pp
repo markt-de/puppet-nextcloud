@@ -11,6 +11,15 @@ class nextcloud::install {
     before => Nextcloud::Install::Distribution['initial install'],
   }
 
+  # Record Nextcloud's datadirectory, so that it can be used by the custom fact.
+  file { 'Create data statefile':
+    ensure  => file,
+    path    => $nextcloud::datastatefile,
+    content => inline_epp('<%= $nextcloud::datadir %>'),
+    owner   => $nextcloud::system_user,
+    group   => $nextcloud::system_group,
+  }
+
   # Perform initial installation of all required files and directories.
   # This is essential for this module so it cannot be disabled.
   nextcloud::install::distribution { 'initial install':

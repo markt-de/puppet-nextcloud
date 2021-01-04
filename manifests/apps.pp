@@ -25,6 +25,8 @@ class nextcloud::apps {
 
         # Install or remove the app.
         # Compare the desired state to what facter has found on the system.
+        # TODO: after performing an upgrade, ignore $facts['nextcloud_apps']
+        # and reinstall all apps to re-add any missing 3rd-party app.
         if ($_ensure == 'present'
           and !(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
           and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))) {

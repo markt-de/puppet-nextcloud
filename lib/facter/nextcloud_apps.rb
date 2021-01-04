@@ -15,6 +15,7 @@ Facter.add('nextcloud_apps') do
           # Get owner of the file.
           occ_uid = File.stat(occ).uid
           # Run occ command as the user that owns this file.
+          # NOTE: This may fail when using NFS with the "mapall" option.
           JSON.parse(Puppet::Util::Execution.execute('php occ app:list --ansi --output=json', uid: occ_uid))
         end
       else
