@@ -10,9 +10,14 @@ This release fixes a bug that caused all attempts to perform an update to fail.
 
 ### Added
 * Add custom fact `nextcloud_dist_jobs`, internally used by `nextcloud::install::distribution`
+* Add custom fact `nextcloud_updates`, it lists all completed Nextcloud updates
+
+### Changed
+* Reinstall all 3rd-party apps after performing an update of Nextcloud
 
 ### Fixed
 * Fix updates by changing the workflow in `nextcloud::install::distribution`
+* Fix missing 3rd-party apps after performing an update of Nextcloud
 
 ## v1.0.0 - 2021-01-01
 Initial release

@@ -23,13 +23,15 @@ class nextcloud::apps {
           default => $_config['status'],
         }
 
-        # Install or remove the app.
-        # Compare the desired state to what facter has found on the system.
-        # TODO: after performing an upgrade, ignore $facts['nextcloud_apps']
-        # and reinstall all apps to re-add any missing 3rd-party app.
+        # Install the app if the following conditions are met:
+        # - it is neither listed as "enabled" nor "disabled" apps
+        # - an update is in progress (the Nextcloud version is not listed as completed update)
         if ($_ensure == 'present'
-          and !(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
-          and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))) {
+          and (
+          (!(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
+          and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))
+          ) or !($nextcloud::version_normalized in $facts['nextcloud_updates'])
+          )) {
 
           # Check if the app should remain disabled after installation.
           $_cmd = ($_status == 'enabled') ? {
@@ -43,6 +45,8 @@ class nextcloud::apps {
             command => $_cmd,
           }
 
+        # Remove the app if the following conditions are met:
+        # - it is listed in "enabled" or "disabled" apps
         } elsif ($_ensure == 'absent'
           and ((('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
           or (('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled'])))) {
