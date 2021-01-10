@@ -6,6 +6,7 @@ class nextcloud::apps {
   if ($nextcloud::manage_apps and !empty($nextcloud::apps)) {
 
     # For safekeeping, do not try to manage apps when the fact is empty.
+    # This should only be the case during the initial install of Nextcloud.
     if (('nextcloud_apps' in $facts) and !empty($facts['nextcloud_apps'])) {
 
       # Walk through the list of apps.
@@ -33,10 +34,15 @@ class nextcloud::apps {
           ) or !($nextcloud::version_normalized in $facts['nextcloud_updates'])
           )) {
 
-          # Check if the app should remain disabled after installation.
-          $_cmd = ($_status == 'enabled') ? {
-            false   => 'install_disable',
-            default => 'install',
+          # Special handling when Nextcloud is updated.
+          if !($nextcloud::version_normalized in $facts['nextcloud_updates']) {
+            $_cmd = 'post_update'
+          } else {
+            # Check if the app should remain disabled after installation.
+            $_cmd = ($_status == 'enabled') ? {
+              false   => 'install_disable',
+              default => 'install',
+            }
           }
 
           # App needs to be installed.

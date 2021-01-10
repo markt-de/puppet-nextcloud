@@ -18,6 +18,7 @@ This release fixes a bug that caused all attempts to perform an update to fail.
 ### Fixed
 * Fix updates by changing the workflow in `nextcloud::install::distribution`
 * Fix missing 3rd-party apps after performing an update of Nextcloud
+* Fix execution of `occ db:convert-filecache-bigint` on initial install
 
 ## v1.0.0 - 2021-01-01
 Initial release

@@ -91,7 +91,7 @@ class nextcloud::install {
     $convert_filecache_done = "${nextcloud::datadir}/.puppet_convert_filecache.done"
     $convert_filecache_cmd = join([
       "touch ${convert_filecache_lock}",
-      'php occ db:convert-filecache-bigint --no-interaction',
+      '&& php occ db:convert-filecache-bigint --no-interaction',
       "&& touch ${convert_filecache_done}",
       "; rm -f ${convert_filecache_lock}", # always remove lock
     ], ' ')
