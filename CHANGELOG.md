@@ -14,6 +14,7 @@ This release fixes a bug that caused all attempts to perform an update to fail.
 
 ### Changed
 * Reinstall all 3rd-party apps after performing an update of Nextcloud
+* Show a client-side warning if app management was forcefully disabled
 
 ### Fixed
 * Fix updates by changing the workflow in `nextcloud::install::distribution`

@@ -89,7 +89,10 @@ class nextcloud::apps {
         }
       }
     } else {
-      warning('No Nextcloud apps have been found; app management is disabled for safekeeping. This warning can be ignored on first occurence.') # lint:ignore:140chars
+      notify {
+        'No Nextcloud apps have been found; app management is disabled for safekeeping. This warning can be ignored on first occurence.':
+          loglevel => warning
+      }
     }
   }
 }
