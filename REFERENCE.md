@@ -259,7 +259,7 @@ Default value: `$title`
 
 ##### `command`
 
-Data type: `Enum['install','remove','enable','disable','install_disable']`
+Data type: `Enum['install','remove','enable','disable','install_disable','post_update']`
 
 The app command that should be executed.
 

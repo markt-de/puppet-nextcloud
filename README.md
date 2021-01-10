@@ -14,6 +14,7 @@
     - [Manage Apps](#manage-apps)
     - [Performing Updates](#performing-updates)
     - [High Availability](#high-availability)
+    - [Directory Structure](#directory-structure)
 1. [Reference](#reference)
 1. [Development](#development)
     - [Contributing](#contributing)
@@ -169,6 +170,54 @@ The module supports highly available setups where multiple servers are used.
 In this case the Nextcloud installation and data directory must be stored on a shared storage like NFS. It is crucial that all servers share these folders. Besides that a highly available instance of Redis should be used as memcache to avoid lock/session contention.
 
 All installation and update tasks of this module use lock files to prevent concurrent execution on multiple servers.
+
+### Directory structure
+
+When using the module with default options...
+
+```puppet
+class { 'nextcloud':
+  datadir      => '/opt/nextcloud-data',
+  installroot  => '/opt',
+  symlink_name => 'nextcloud',
+  version      => '20.0.4',
+}
+```
+
+...the directory structure will look like this:
+
+
+```
+/
+|-- opt/
+| |-- nextcloud@                            # symlink to the current install dir (nextcloud-20.0.4)
+| |-- nextcloud-20.0.3                      # install dir for a previous version (will not be purged)
+| |-- nextcloud-20.0.4                      # install dir for the current version
+| | |-- nextcloud                           # default application folder (extracted from dist archive)
+| |   |-- config
+| |   | |-- config.php@                     # symlink to the real config.php in Nectloud's data dir
+| |-- nextcloud-data                        # Nextcloud's data directory
+|     |-- .config.php                       # real config.php (hidden file)
+|     |-- .puppet_app.lock                  # indicates that Puppet is currently running a app management command
+|     |-- .puppet_convert_filecache.done    # indicates that Puppet completed the "convert filecache" command
+|     |-- .puppet_dist_initial_install.done # indicates that the initial install of Nextcloud is done
+|     |-- .puppet_missing_indices.done      # indicates that Puppet completed the "missing indices" command
+|     |-- .puppet_update_20.0.3.done        # indicates that an update to version 20.0.3 was performed
+|     |-- .puppet_update_20.0.4.done        # indicates that an update to version 20.0.4 was performed
+|-- var/
+| |-- db/
+|   |-- nextcloud_data                      # contains the path to Nextcloud's data dir (used by custom fact)
+|   |-- nextcloud_home                      # contains the path to Nextcloud's install/home dir (used by custom fact)
+
+```
+
+In this example, Nextcloud was initially installed with version 20.0.3 and later updated to version 20.0.4.
+
+The suffix `.done` indicates that this file is used by the module to identify completed jobs.
+
+The suffix `.lock` indicates that this file is used by the module to identify currently running jobs.
+
+All files that are prefixed with `.puppet_` are required for proper operation of this module and must not be removed.
 
 ## Reference
 
