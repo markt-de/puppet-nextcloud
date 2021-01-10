@@ -195,7 +195,7 @@ class { 'nextcloud':
 | |-- nextcloud-20.0.4                      # install dir for the current version
 | | |-- nextcloud                           # default application folder (extracted from dist archive)
 | |   |-- config
-| |   | |-- config.php@                     # symlink to the real config.php in Nectloud's data dir
+| |   | |-- config.php@                     # symlink to the real config.php in Nextcloud's data dir
 | |-- nextcloud-data                        # Nextcloud's data directory
 |     |-- .config.php                       # real config.php (hidden file)
 |     |-- .puppet_app.lock                  # indicates that Puppet is currently running a app management command
