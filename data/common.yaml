@@ -10,7 +10,7 @@ nextcloud::config:
   filelocking.enabled: true
 nextcloud::cronjobs:
   'Nextcloud background job':
-    command: "php -f %%{}s/cron.php"
+    command: "php -f %%{}s/cron.php >/dev/null 2>&1"
     minute: '*/5'
 nextcloud::datadir: '/opt/nextcloud-data'
 nextcloud::datastatefile: '/var/db/nextcloud_data'
