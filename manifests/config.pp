@@ -7,6 +7,7 @@ class nextcloud::config {
     case $_config_value {
       String, Boolean, Integer: {
         nextcloud::config_command { $_config_key:
+          section      => 'system',
           value        => $_config_value,
           verify_key   => $_config_key,
           verify_value => $_config_value,
@@ -15,6 +16,7 @@ class nextcloud::config {
       Array: {
         $_config_value.each | $_index, $_config_array_value | {
           nextcloud::config_command { "${_config_key} ${_index}":
+            section      => 'system',
             value        => $_config_array_value,
             verify_key   => $_config_key,
             verify_value => $_config_array_value,
@@ -24,6 +26,7 @@ class nextcloud::config {
       Hash: {
         $_config_value.each | $_config_hash_key, $_config_hash_value | {
           nextcloud::config_command { "${_config_key} \'${_config_hash_key}\'":
+            section      => 'system',
             value        => $_config_hash_value,
             verify_key   => "${_config_key} ${_config_hash_key}",
             verify_value => $_config_hash_value,

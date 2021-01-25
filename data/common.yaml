@@ -2,6 +2,7 @@
 nextcloud::admin_password: ~
 nextcloud::admin_user: 'admin'
 nextcloud::apps: {}
+nextcloud::app_config: {}
 nextcloud::command_timeout: 7200
 nextcloud::config:
   trusted_domains:
