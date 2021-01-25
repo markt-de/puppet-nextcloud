@@ -181,7 +181,7 @@ class { 'nextcloud':
 }
 ```
 
-The app name should be the hey in the hash and any configuration parameters for that app
+The app name should be the key in the hash and any configuration parameters for that app
 should be key/value pairs within.
 
 ### Performing Updates
