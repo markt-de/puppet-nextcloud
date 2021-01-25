@@ -28,7 +28,7 @@ describe 'nextcloud' do
 
         it {
           is_expected.to contain_cron('Nextcloud background job').with(
-            command: 'test ! -f /opt/nextcloud-data/.puppet_update.lock && php -f /opt/nextcloud/cron.php',
+            command: 'test ! -f /opt/nextcloud-data/.puppet_update.lock && php -f /opt/nextcloud/cron.php >/dev/null 2>&1',
             environment: ['PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin'],
             minute: '*/5',
           )
