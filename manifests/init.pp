@@ -9,6 +9,16 @@
 # @param apps
 #   Specifies a list of Nextcloud apps and their desired state.
 #
+# @param app_config
+#   A hash containing configuration options for Nextcloud apps.
+#   The hash should be in the format:
+#   {
+#     'my_app_name' => {
+#       'setting1' => 'xyz123',
+#       'setting2' => 'blah',
+#     },
+#   }
+#
 # @param command_timeout
 #   Specifies the time to wait for install/update/maintenance commands
 #   to complete. Keep in mind that several commands may take a few hours
@@ -101,6 +111,7 @@
 #
 class nextcloud (
   Hash $apps,
+  Hash $app_config,
   String $admin_password,
   String $admin_user,
   Integer $command_timeout,
@@ -162,14 +173,14 @@ class nextcloud (
 
   # NOTE: All commands should use a simple lock mechanism to prevent concurrent
   # execution when multiple servers are used:
-  # 
+  #
   # - create a lock file as part of the command execution
   # - do not run the Exec if the lock file can be found
   # - remove the lock file as part of the command execution
-  # 
+  #
   # The lock file should be created in Nextcloud's data directory, because
   # this is most likely shared between all servers.
-  # 
+  #
   # Ensure that the lock file is removed, even if the command fails. This way
   # a failed command can be retried.
 
@@ -178,5 +189,6 @@ class nextcloud (
   -> class { 'nextcloud::update': }
   -> class { 'nextcloud::apps': }
   -> class { 'nextcloud::config': }
+  -> class { 'nextcloud::app_config': }
   -> class { 'nextcloud::cron': }
 }

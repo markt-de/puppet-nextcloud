@@ -21,6 +21,7 @@ describe 'nextcloud' do
         it { is_expected.to contain_class('nextcloud::update') }
         it { is_expected.to contain_class('nextcloud::apps') }
         it { is_expected.to contain_class('nextcloud::config') }
+        it { is_expected.to contain_class('nextcloud::app_config') }
         it { is_expected.to contain_class('nextcloud::cron') }
 
         it { is_expected.to contain_file('/opt/nextcloud-data').with_ensure('directory') }

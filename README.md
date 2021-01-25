@@ -155,6 +155,34 @@ The parameter `status` specifies whether the app should be `disabled` or `enable
 
 Both parameters can be ommitted and replaced with an empty string `''` or an empty hash `{}`. In this case the default values will be used (present/enabled).
 
+### Configuring Apps
+
+Nextcloud apps can be configured using the `$app_config` parameter:
+
+```puppet
+class { 'nextcloud':
+  apps => {
+    document_community => {
+      ensure => present,
+      status => enabled,
+    },
+    onlyoffice => {
+      ensure => present,
+      status => enabled,
+    },
+  },
+  app_config => {
+    onlyoffice => {
+      DocumentServerUrl => "https://${$facts['fqdn']}/index.php/apps/documentserver_community/",
+      verify_peer_off: 'true',
+    },
+  },
+}
+```
+
+The app name should be the hey in the hash and any configuration parameters for that app
+should be key/value pairs within.
+
 ### Performing Updates
 
 The module will automatically perform updates of Nextcloud when the value of `$version` is changed. Nextcloud's native upgrade command will also be utilized, but depending on the size of the installation, it may be required to increase the value of `$command_timeout`. The use of the native upgrade command may be disabled by setting `$update_enabled` to `false`, which will allow to perform this step manually at any time. Note that this does NOT prevent the automatic update, it will only skip the native upgrade command. To completely disable all updates, the parameter `$update_enabled` must be set to `none`.

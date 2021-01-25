@@ -18,26 +18,27 @@ define nextcloud::config_command (
   Variant[Boolean, Integer, String] $verify_key,
   Variant[Boolean, Integer, String] $verify_value,
   Variant[Boolean, Integer, String] $key = $title,
+  Enum['app', 'system']             $section = 'system',
 ){
   # Check if the configuration key should be removed.
   $_key = split($key, /:/)
   case $_key[0] {
     'DELETE': {
       $cfg_key = $_key[1]
-      $_occ_cmd = 'config:system:delete'
+      $_occ_cmd = "config:${section}:delete"
       $_occ_args = $cfg_key
       $unless_cmd = join([
-        "php occ config:system:get ${cfg_key}",
+        "php occ config:${section}:get ${cfg_key}",
         # Modify the exit code to work with Exec's "unless".
         '; _exit=$?; test $_exit -gt 0'
       ], ' ')
     }
     default: {
       $cfg_key = $key
-      $_occ_cmd = 'config:system:set'
+      $_occ_cmd = "config:${section}:set"
       $_occ_args = "${cfg_key} --value=\'${value}\'"
       $unless_cmd = join([
-        'php occ config:system:get',
+        "php occ config:${section}:get",
         $verify_key,
         '| grep -qF',
         "\'${verify_value}\'",
