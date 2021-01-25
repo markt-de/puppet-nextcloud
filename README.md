@@ -1,8 +1,8 @@
 # puppet-nextcloud
 
-[![Build Status](https://travis-ci.org/markt-de/puppet-nextcloud.png?branch=master)](https://travis-ci.org/markt-de/puppet-nextcloud)
+[![Build Status](https://travis-ci.org/markt-de/puppet-nextcloud.png?branch=main)](https://travis-ci.org/markt-de/puppet-nextcloud)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/fraenki/nextcloud.svg)](https://forge.puppetlabs.com/fraenki/nextcloud)
-[![Puppet Forge](https://img.shields.io/puppetforge/f/fraenki/nextcloud.svg)](https://forge.puppetlabs.com/fraenki/nextcloud)
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/fraenki/nextcloud.svg)](https://forge.puppetlabs.com/fraenki/nextcloud)
 
 #### Table of Contents
 
@@ -10,8 +10,9 @@
 1. [Requirements](#requirements)
 1. [Usage](#usage)
     - [Basic usage](#basic-usage)
-    - [Configure Nextcloud](#configure-nextcloud)
-    - [Manage Apps](#manage-apps)
+    - [Configuring Nextcloud](#configuring-nextcloud)
+    - [Managing Apps](#managing-apps)
+    - [Configuring Apps](#configuring-apps)
     - [Performing Updates](#performing-updates)
     - [High Availability](#high-availability)
     - [Directory Structure](#directory-structure)
@@ -85,7 +86,7 @@ A full list of available parameters is available in [REFERENCE.md](REFERENCE.md)
 
 All default values can be found in the `data/` directory.
 
-### Configure Nextcloud
+### Configuring Nextcloud
 
 All entries in `$config` will be added to Nextcloud's configuration:
 
@@ -124,7 +125,7 @@ This example would remove the `memcache.distributed` option from the configurati
 
 *Note:* All settings are added _after_ performing the initial installation of Nextcloud, hence no setting in `$config` will have an affect on the installation process.
 
-### Manage Apps
+### Managing Apps
 
 Nextcloud apps can be installed, removed, enabled and disabled by using the `$apps` parameter:
 

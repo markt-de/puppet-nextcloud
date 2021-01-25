@@ -12,6 +12,7 @@
 
 #### Private Classes
 
+* `nextcloud::app_config`: Set configuration options for Nextcloud apps
 * `nextcloud::apps`: Manage Nextcloud apps
 * `nextcloud::config`: Set configuration options for Nextcloud
 * `nextcloud::cron`: Configure background cron jobs for Nextcloud
@@ -52,6 +53,19 @@ Specifies the username for the Nextcloud admin.
 Data type: `Hash`
 
 Specifies a list of Nextcloud apps and their desired state.
+
+##### `app_config`
+
+Data type: `Hash`
+
+A hash containing configuration options for Nextcloud apps.
+The hash should be in the format:
+{
+  'my_app_name' => {
+    'setting1' => 'xyz123',
+    'setting2' => 'blah',
+  },
+}
 
 ##### `command_timeout`
 
@@ -297,6 +311,14 @@ The configuration key to find out whether it needs to be altered.
 Data type: `Variant[Boolean, Integer, String]`
 
 The configuration verify to find out whether it needs to be altered.
+
+##### `section`
+
+Data type: `Enum['app', 'system']`
+
+
+
+Default value: `'system'`
 
 ### `nextcloud::install::distribution`
 
