@@ -26,6 +26,10 @@
 * [`nextcloud::config_command`](#nextcloudconfig_command): Set or remove a single configuration value
 * [`nextcloud::install::distribution`](#nextcloudinstalldistribution): Download and extract the distribution archive
 
+### Functions
+
+* [`nextcloud::create_config_resources`](#nextcloudcreate_config_resources): Create nextcloud::config_command resources from a nested hash (e.g. from hiera)
+
 ## Classes
 
 ### `nextcloud`
@@ -337,4 +341,39 @@ being executed multiple times by remembering its state. This is most useful
 to distinguish between an initial install and an update.
 
 Default value: ``undef``
+
+## Functions
+
+### `nextcloud::create_config_resources`
+
+Type: Puppet Language
+
+Create nextcloud::config_command resources from a nested hash, suitable for
+conveniently loading values from hiera.
+The key-value pairs from the hash represent config keys and values
+passed to nextcloud::config_command for simple values, Hash and Array values
+recursively # create nested sections.
+
+#### `nextcloud::create_config_resources(Hash[String, NotUndef] $config_hash, Array[String] $sections = [])`
+
+Create nextcloud::config_command resources from a nested hash, suitable for
+conveniently loading values from hiera.
+The key-value pairs from the hash represent config keys and values
+passed to nextcloud::config_command for simple values, Hash and Array values
+recursively # create nested sections.
+
+Returns: `Any`
+
+##### `config_hash`
+
+Data type: `Hash[String, NotUndef]`
+
+A hash of (non-hierarchical) key names mapped to values.
+
+##### `sections`
+
+Data type: `Array[String]`
+
+The section names of the hierarchical key, will usually only be specified
+on recursive calls from within this function itself.
 
