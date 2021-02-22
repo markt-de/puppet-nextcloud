@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 * Add support for hierarchical settings ([#1])
 
+### Fixed
+* Properly escape passwords in shell commands ([#4])
+
 ## [v1.3.0] - 2021-01-25
 
 ### Added
@@ -44,5 +47,6 @@ Initial release
 [v1.3.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.0.0...v1.1.0
+[#4]: https://github.com/markt-de/puppet-nextcloud/pull/4
 [#3]: https://github.com/markt-de/puppet-nextcloud/pull/3
 [#1]: https://github.com/markt-de/puppet-nextcloud/pull/1
