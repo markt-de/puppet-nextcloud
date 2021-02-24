@@ -96,9 +96,9 @@ class { 'nextcloud':
     mail_smtpmode        => 'smtp',
     mail_smtphost        => 'mail.example.com',
     mail_smtpport        => 25,
-    memcache.local       => '\\OC\\Memcache\\Redis',
-    memcache.distributed => '\\OC\\Memcache\\Redis',
-    memcache.locking     => '\\OC\\Memcache\\Redis',
+    memcache.local       => '\OC\Memcache\Redis',
+    memcache.distributed => '\OC\Memcache\Redis',
+    memcache.locking     => '\OC\Memcache\Redis',
     overwrite.cli.url    => 'https://nextcloud.example.com/',
     overwritehost        => 'nextcloud.example.com',
     trusted_domains      => [ 'nextcloud.example.com', 'cloud.example.com' ],
@@ -146,7 +146,7 @@ In case an option needs to be completely _removed_ from the configuration, add t
 ```puppet
 class { 'nextcloud':
   config => {
-    'DELETE:memcache.distributed' => '\\OC\\Memcache\\Redis',
+    'DELETE:memcache.distributed' => '\OC\Memcache\Redis',
   },
   ...
 }
