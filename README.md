@@ -110,6 +110,37 @@ class { 'nextcloud':
 
 Every option will be added by using Nextcloud's native config commands. The configuration file will NOT be replaced by this module. This menas that it is still possible to modify Nextcloud's configuration without using Puppet.
 
+Hierarchical settings are also supported:
+
+```puppet
+class { 'nextcloud':
+  config => {
+    app_paths => [
+      {
+        path => '/opt/nextcloud/apps',
+        url => '/apps',
+        writable => false
+      },
+      {
+        path => '/opt/nextcloud-user-apps',
+        url => '/user-apps',
+        writable => false
+      }
+    ],
+    'redis.cluster' => {
+      seeds => [
+        'redis1.example.com:6379',
+        'redis2.example.com:6379',
+        'redis3.example.com:6379',
+      ],
+      timeout => 60,
+    },
+    ...
+  },
+  ...
+}
+```
+
 In case an option needs to be completely _removed_ from the configuration, add the `DELETE:` prefix:
 
 ```puppet
