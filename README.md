@@ -96,7 +96,7 @@ class { 'nextcloud':
     mail_smtpmode        => 'smtp',
     mail_smtphost        => 'mail.example.com',
     mail_smtpport        => 25,
-    memcache.local       => '\OC\Memcache\Redis',
+    memcache.local       => '\OC\Memcache\APCu',
     memcache.distributed => '\OC\Memcache\Redis',
     memcache.locking     => '\OC\Memcache\Redis',
     overwrite.cli.url    => 'https://nextcloud.example.com/',
