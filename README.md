@@ -217,7 +217,18 @@ should be key/value pairs within.
 
 ### Performing Updates
 
-The module will automatically perform updates of Nextcloud when the value of `$version` is changed. Nextcloud's native upgrade command will also be utilized, but depending on the size of the installation, it may be required to increase the value of `$command_timeout`. The use of the native upgrade command may be disabled by setting `$update_enabled` to `false`, which will allow to perform this step manually at any time. Note that this does NOT prevent the automatic update, it will only skip the native upgrade command. To completely disable all updates, the parameter `$update_enabled` must be set to `none`.
+The module will automatically perform updates of Nextcloud when the value of `$version` is changed. An optional post-update command can be specified, which will be executed as root:
+
+```puppet
+class { 'nextcloud':
+  post_update_cmd => 'systemctl restart php-fpm'
+  ...
+}
+```
+
+Note that the post-update command will run on all servers (up to 30 minutes after the update was installed).
+
+Nextcloud's native upgrade command will also be utilized, but depending on the size of the installation, it may be required to increase the value of `$command_timeout`. The use of the native upgrade command and the post-update command may be disabled by setting `$update_enabled` to `false`, which will allow to perform these steps manually at any time. Note that this does NOT prevent the automatic update, it will only skip the native upgrade and post-update commands. To completely disable all updates, the parameter `$update_enabled` must be set to `none`.
 
 The old installation folder will be preserved. In theory, it should be possible to revert to the previous version if no incompatible (database) change was involved. The official Nextcloud documentation should provide more details.
 

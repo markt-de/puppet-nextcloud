@@ -39,6 +39,10 @@
 #   A file that is required by the module to work properly. This value MUST NOT
 #   be changed, because the path is hardcoded in several places.
 #
+# @param date_expression
+#   A date command that will be used when checking if `$post_update_cmd`
+#   should be executed.
+#
 # @param debug
 #   Whether to enable additional output for debugging purposes.
 #
@@ -80,6 +84,13 @@
 #   Specifies a list of PHP extensions that should be installed when
 #   `$manage_php` is enabled.
 #
+# @param post_update_cmd
+#   An optional command that should be executed after performing an update.
+#
+# @param stat_expression
+#   A stat command that will be used when checking if `$post_update_cmd`
+#   should be executed.
+#
 # @param statefile
 #   A file that is required by the module to work properly. This value MUST NOT
 #   be changed, because the path is hardcoded in several places.
@@ -119,6 +130,7 @@ class nextcloud (
   Hash $cronjobs,
   Stdlib::Compat::Absolute_path $datadir,
   Stdlib::Compat::Absolute_path $datastatefile,
+  String $date_expression,
   String $db_driver,
   String $db_host,
   String $db_name,
@@ -135,6 +147,8 @@ class nextcloud (
   Variant[Stdlib::HTTPUrl,Stdlib::HTTPSUrl] $mirror,
   String $path,
   Hash $php_extensions,
+  String $post_update_cmd,
+  String $stat_expression,
   Stdlib::Compat::Absolute_path $statefile,
   String $symlink_name,
   String $system_group,

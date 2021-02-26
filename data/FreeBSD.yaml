@@ -1,3 +1,5 @@
 ---
+nextcloud::date_expression: "date -v-30M '+%s'"
+nextcloud::stat_expression: "stat -f '%m'"
 nextcloud::system_group: 'www'
 nextcloud::system_user: 'www'

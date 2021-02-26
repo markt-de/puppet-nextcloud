@@ -15,6 +15,7 @@ nextcloud::cronjobs:
     minute: '*/5'
 nextcloud::datadir: '/opt/nextcloud-data'
 nextcloud::datastatefile: '/var/db/nextcloud_data'
+nextcloud::date_expression: "date --date='30 minutes ago' '+%s'"
 nextcloud::db_driver: 'mysql'
 nextcloud::db_host: 'localhost'
 nextcloud::db_name: 'nextcloud'
@@ -47,6 +48,8 @@ nextcloud::php_extensions:
   readline: {}
   xml: {}
   zip: {}
+nextcloud::post_update_cmd: 'true'
+nextcloud::stat_expression: "stat -c '%Y'"
 nextcloud::statefile: '/var/db/nextcloud_home'
 nextcloud::symlink_name: 'nextcloud'
 nextcloud::update_enabled: true

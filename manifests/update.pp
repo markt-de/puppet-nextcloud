@@ -32,6 +32,26 @@ class nextcloud::update {
         logoutput => $nextcloud::debug,
         require   => Nextcloud::Install::Distribution["update to ${nextcloud::version}"],
       }
+
+      # Only run post-update command if update was less than 30 minutes ago.
+      $post_update_onlyif = join([
+        "test -f \'${update_done}\'",
+        '&&',
+        'test',
+        "\$( ${nextcloud::stat_expression} \'${update_done}\' )",
+        '-gt',
+        "\$( ${nextcloud::date_expression} )",
+      ], ' ')
+
+      # Run the post-update command.
+      exec { 'post-update command':
+        command   => $nextcloud::post_update_cmd,
+        path      => $nextcloud::path,
+        cwd       => $nextcloud::distribution_dir,
+        onlyif    => $post_update_onlyif,
+        logoutput => $nextcloud::debug,
+        require   => Nextcloud::Install::Distribution["update to ${nextcloud::version}"],
+      }
     }
   }
 }

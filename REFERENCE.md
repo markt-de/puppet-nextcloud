@@ -106,6 +106,13 @@ Data type: `Stdlib::Compat::Absolute_path`
 A file that is required by the module to work properly. This value MUST NOT
 be changed, because the path is hardcoded in several places.
 
+##### `date_expression`
+
+Data type: `String`
+
+A date command that will be used when checking if `$post_update_cmd`
+should be executed.
+
 ##### `debug`
 
 Data type: `Boolean`
@@ -179,6 +186,19 @@ Data type: `Hash`
 
 Specifies a list of PHP extensions that should be installed when
 `$manage_php` is enabled.
+
+##### `post_update_cmd`
+
+Data type: `String`
+
+An optional command that should be executed after performing an update.
+
+##### `stat_expression`
+
+Data type: `String`
+
+A stat command that will be used when checking if `$post_update_cmd`
+should be executed.
 
 ##### `statefile`
 
