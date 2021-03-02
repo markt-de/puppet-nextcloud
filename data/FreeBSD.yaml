@@ -1,5 +1,9 @@
 ---
 nextcloud::date_expression: "date -v-30M '+%s'"
+nextcloud::hpb_service_config_file: '/etc/rc.conf.d/nextcloud_notify_push'
+nextcloud::hpb_service_file: '/usr/local/etc/rc.d/nextcloud_notify_push'
+nextcloud::hpb_service_mode: '0755'
+nextcloud::service_provider: 'rc'
 nextcloud::stat_expression: "stat -f '%m'"
 nextcloud::system_group: 'www'
 nextcloud::system_user: 'www'

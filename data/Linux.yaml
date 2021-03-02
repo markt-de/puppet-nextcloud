@@ -1,0 +1,4 @@
+---
+nextcloud::hpb_service_file: '/etc/systemd/system/notify_push.service'
+nextcloud::hpb_service_mode: '0644'
+nextcloud::service_provider: 'systemd'

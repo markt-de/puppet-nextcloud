@@ -46,6 +46,30 @@
 # @param debug
 #   Whether to enable additional output for debugging purposes.
 #
+# @param hpb_app
+#   Specifies the name of the HPB app to be installed.
+#
+# @param hpb_binary
+#   Specifies the relative path to the binary of the HPB app.
+#
+# @param hpb_pidfile
+#   Specifies the PID file for the HPB service.
+#
+# @param hpb_port
+#   Specifies the port for the HPB service.
+#
+# @param hpb_service_config_file
+#   Specifies the full path to the HPB service config file.
+#
+# @param hpb_service_file
+#   Specifies the full path to the HPB service definition / startup script.
+#
+# @param hpb_service_mode
+#   Specifies the file mode for the HPB service definition / startup script.
+#
+# @param hpb_service_name
+#   Specifies the name for the HPB service.
+#
 # @param install_enabled
 #   Whether to download and extract the release distribution files, switch the
 #   symlink to the specified release. On new installs it also runs the required
@@ -62,6 +86,9 @@
 #
 # @param manage_cron
 #   Whether to manage Nextcloud's background cron job(s).
+#
+# @param manage_hpb
+#   Whehter to manage Nextcloud's notify_push app, the High Performance Back-end (HPB).
 #
 # @param manage_php
 #   Whether to setup and maintain PHP (FPM/CLI) and install modules needed
@@ -86,6 +113,9 @@
 #
 # @param post_update_cmd
 #   An optional command that should be executed after performing an update.
+#
+# @param service_provider
+#   The operating system's service manager.
 #
 # @param stat_expression
 #   A stat command that will be used when checking if `$post_update_cmd`
@@ -137,17 +167,28 @@ class nextcloud (
   String $db_password,
   String $db_user,
   Boolean $debug,
+  Enum['running', 'stopped'] $hpb_service_ensure,
+  String $hpb_app,
+  String $hpb_binary,
+  Stdlib::Compat::Absolute_path $hpb_pidfile,
+  Integer $hpb_port,
+  Stdlib::Compat::Absolute_path $hpb_service_config_file,
+  Stdlib::Compat::Absolute_path $hpb_service_file,
+  String $hpb_service_mode,
+  String $hpb_service_name,
   Boolean $install_enabled,
   Stdlib::Compat::Absolute_path $installroot,
   Boolean $manage_apps,
   Boolean $manage_cron,
   Boolean $manage_php,
+  Boolean $manage_hpb,
   Boolean $manage_redis,
   Boolean $manage_symlink,
   Variant[Stdlib::HTTPUrl,Stdlib::HTTPSUrl] $mirror,
   String $path,
   Hash $php_extensions,
   String $post_update_cmd,
+  Enum['rc', 'systemd'] $service_provider,
   String $stat_expression,
   Stdlib::Compat::Absolute_path $statefile,
   String $symlink_name,
@@ -204,5 +245,6 @@ class nextcloud (
   -> class { 'nextcloud::apps': }
   -> class { 'nextcloud::config': }
   -> class { 'nextcloud::app_config': }
+  -> class { 'nextcloud::hpb': }
   -> class { 'nextcloud::cron': }
 }

@@ -14,6 +14,7 @@
     - [Managing Apps](#managing-apps)
     - [Configuring Apps](#configuring-apps)
     - [Performing Updates](#performing-updates)
+    - [High Performance Backend](#high-performance-backend)
     - [High Availability](#high-availability)
     - [Directory Structure](#directory-structure)
 1. [Reference](#reference)
@@ -233,6 +234,18 @@ Nextcloud's native upgrade command will also be utilized, but depending on the s
 The old installation folder will be preserved. In theory, it should be possible to revert to the previous version if no incompatible (database) change was involved. The official Nextcloud documentation should provide more details.
 
 However, it must be ensured that the upgrade path is supported by Nextcloud prior to attempting an update. Besides that performing a full backup periodically is strongly advised.
+
+### High Performance Backend
+
+The module supports Nextcloud's High Performance Backend that was introduced in Nextcloud 21. To let the module install the "notify_push" app and manage this service, set `$manage_hpb` to `true`.
+
+Keep in mind that you have to manually configure your webserver or reverse proxy to actually use the High Performance Backend. In case of Apache HTTPD, just add the following lines to the <VirtualHost> block used for the Nextcloud server:
+
+```
+  ProxyPass /push/ws ws://127.0.0.1:7867/ws
+  ProxyPass /push/ http://127.0.0.1:7867/
+  ProxyPassReverse /push/ http://127.0.0.1:7867/
+```
 
 ### High Availability
 

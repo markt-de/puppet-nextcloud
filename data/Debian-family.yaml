@@ -1,3 +1,4 @@
 ---
+nextcloud::hpb_service_config_file: '/etc/default/notify_push'
 nextcloud::system_group: 'www-data'
 nextcloud::system_user: 'www-data'

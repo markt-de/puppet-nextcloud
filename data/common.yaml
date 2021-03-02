@@ -22,10 +22,17 @@ nextcloud::db_name: 'nextcloud'
 nextcloud::db_password: ~
 nextcloud::db_user: 'nextcloud'
 nextcloud::debug: false
+nextcloud::hpb_app: 'notify_push'
+nextcloud::hpb_binary: 'apps/notify_push/bin/x86_64/notify_push'
+nextcloud::hpb_pidfile: '/var/run/nextcloud_notify_push.pid'
+nextcloud::hpb_port: 7867
+nextcloud::hpb_service_ensure: 'running'
+nextcloud::hpb_service_name: 'notify_push'
 nextcloud::install_enabled: true
 nextcloud::installroot: '/opt'
 nextcloud::manage_apps: true
 nextcloud::manage_cron: true
+nextcloud::manage_hpb: false
 nextcloud::manage_php: false
 nextcloud::manage_redis: false
 nextcloud::manage_symlink: true

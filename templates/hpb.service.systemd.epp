@@ -1,0 +1,10 @@
+[Unit]
+Description = Push daemon for Nextcloud clients
+
+[Service]
+EnvironmentFile=-<%= $service_config %>
+ExecStart=<%= $binary %> <%= $config %>
+User=<%= $user %>
+
+[Install]
+WantedBy = multi-user.target
