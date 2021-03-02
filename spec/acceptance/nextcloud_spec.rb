@@ -8,8 +8,8 @@ describe 'nextcloud class' do
       class { 'nextcloud':
         admin_password => 'suPeRseCreT',
         db_password    => 'secRetPasSwOrd',
-        system_group   => 'nobody',
-        system_user    => 'nogroup',
+        system_group   => 'nogroup',
+        system_user    => 'nobody',
         version        => '21.0.0',
       }
       EOS
