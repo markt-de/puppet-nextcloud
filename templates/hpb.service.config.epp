@@ -12,5 +12,5 @@ nextcloud_notify_push_enable="NO"
 nextcloud_notify_push_binary="<%= $binary %>"
 nextcloud_notify_push_config="<%= $config %>"
 nextcloud_notify_push_pidfile="<%= $pidfile %>"
-nextcloud_notify_push_user="<%= $user %>"
+nextcloud_notify_push_service_user="<%= $user %>"
 <% } -%>
