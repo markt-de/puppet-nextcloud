@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# PROVIDE: nextcloud_notify_push
+# REQUIRE: NETWORKING DAEMON
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf to enable nextcloud_notify_push:
+#
+#nextcloud_notify_push_enable="YES"
+
+. /etc/rc.subr
+
+name="nextcloud_notify_push"
+rcvar="nextcloud_notify_push_enable"
+
+load_rc_config $name
+
+: ${nextcloud_notify_push_enable:=NO}
+: ${nextcloud_notify_push_binary:=/opt/nextcloud/apps/notify_push/bin/x86_64/notify_push}
+: ${nextcloud_notify_push_config:=/opt/nextcloud/config/config.php}
+: ${nextcloud_notify_push_flags:=-p 7867}
+: ${nextcloud_notify_push_pidfile:=/var/run/nextcloud_notify_push.pid}
+: ${nextcloud_notify_push_user:=www-nobody}
+
+my_flags=${nextcloud_notify_push_flags}
+nextcloud_notify_push_flags=
+
+binary=$nextcloud_notify_push_binary
+pidfile=$nextcloud_notify_push_pidfile
+user=$nextcloud_notify_push_user
+command="/usr/sbin/daemon"
+command_args="-S -u ${user} -P ${pidfile} -- ${binary} \
+	${my_flags} ${nextcloud_notify_push_config}"
+
+run_rc_command "$1"

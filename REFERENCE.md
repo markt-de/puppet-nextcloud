@@ -16,6 +16,7 @@
 * `nextcloud::apps`: Manage Nextcloud apps
 * `nextcloud::config`: Set configuration options for Nextcloud
 * `nextcloud::cron`: Configure background cron jobs for Nextcloud
+* `nextcloud::hpb`: Configure Nextcloud's High Performance Back-end (HPB)
 * `nextcloud::install`: Download and extract the distribution archive
 * `nextcloud::pre_install`: Pre installation tasks
 * `nextcloud::update`: Perform required tasks to update Nextcloud
@@ -119,6 +120,54 @@ Data type: `Boolean`
 
 Whether to enable additional output for debugging purposes.
 
+##### `hpb_app`
+
+Data type: `String`
+
+Specifies the name of the HPB app to be installed.
+
+##### `hpb_binary`
+
+Data type: `String`
+
+Specifies the relative path to the binary of the HPB app.
+
+##### `hpb_pidfile`
+
+Data type: `Stdlib::Compat::Absolute_path`
+
+Specifies the PID file for the HPB service.
+
+##### `hpb_port`
+
+Data type: `Integer`
+
+Specifies the port for the HPB service.
+
+##### `hpb_service_config_file`
+
+Data type: `Stdlib::Compat::Absolute_path`
+
+Specifies the full path to the HPB service config file.
+
+##### `hpb_service_file`
+
+Data type: `Stdlib::Compat::Absolute_path`
+
+Specifies the full path to the HPB service definition / startup script.
+
+##### `hpb_service_mode`
+
+Data type: `String`
+
+Specifies the file mode for the HPB service definition / startup script.
+
+##### `hpb_service_name`
+
+Data type: `String`
+
+Specifies the name for the HPB service.
+
 ##### `install_enabled`
 
 Data type: `Boolean`
@@ -147,6 +196,12 @@ or disabled.
 Data type: `Boolean`
 
 Whether to manage Nextcloud's background cron job(s).
+
+##### `manage_hpb`
+
+Data type: `Boolean`
+
+Whehter to manage Nextcloud's notify_push app, the High Performance Back-end (HPB).
 
 ##### `manage_php`
 
@@ -192,6 +247,12 @@ Specifies a list of PHP extensions that should be installed when
 Data type: `String`
 
 An optional command that should be executed after performing an update.
+
+##### `service_provider`
+
+Data type: `Enum['rc', 'systemd']`
+
+The operating system's service manager.
 
 ##### `stat_expression`
 
@@ -274,6 +335,12 @@ Data type: `String`
 ##### `db_user`
 
 Data type: `String`
+
+
+
+##### `hpb_service_ensure`
+
+Data type: `Enum['running', 'stopped']`
 
 
 

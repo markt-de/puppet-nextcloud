@@ -1,0 +1,16 @@
+# This file is managed by Puppet. DO NOT EDIT.
+
+<% if ($provider == 'systemd') { -%>
+PORT=<%= $port %>
+#NEXTCLOUD_URL=$ncUrl
+<% } elsif ($provider == 'rc') { -%>
+<%   if ($enable) { -%>
+nextcloud_notify_push_enable="YES"
+<%   } else { -%>
+nextcloud_notify_push_enable="NO"
+<%   } -%>
+nextcloud_notify_push_binary="<%= $binary %>"
+nextcloud_notify_push_config="<%= $config %>"
+nextcloud_notify_push_pidfile="<%= $pidfile %>"
+nextcloud_notify_push_user="<%= $user %>"
+<% } -%>
