@@ -45,19 +45,7 @@ jobs:
       - "bundle exec rake litmus:install_module"
       bundler_args:
       dist: xenial
-      env: PLATFORMS=travis_el8_puppet6 RUN_TEST=main
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-    -
-      before_script:
-      - "bundle exec rake 'litmus:provision_list[travis_el8]'"
-      - "bundle exec rake 'litmus:install_agent[puppet6]'"
-      - "bundle exec rake litmus:install_module"
-      bundler_args:
-      dist: xenial
-      env: PLATFORMS=travis_el8_puppet6 RUN_TEST=replication
+      env: PLATFORMS=travis_el8_puppet6
       rvm: 2.5.3
       script: ["bundle exec rake litmus:acceptance:parallel"]
       services: docker

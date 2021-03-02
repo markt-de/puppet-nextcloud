@@ -1,6 +1,13 @@
 require 'spec_helper_acceptance'
 
 describe 'nextcloud class' do
+  group_name = case fact('osfamily')
+               when 'Debian'
+                 'nogroup'
+               else
+                 'nobody'
+               end
+
   context 'default parameters' do
     # Using puppet_apply as a helper
     it 'is expected to work idempotently with no errors' do
@@ -8,7 +15,7 @@ describe 'nextcloud class' do
       class { 'nextcloud':
         admin_password => 'suPeRseCreT',
         db_password    => 'secRetPasSwOrd',
-        system_group   => 'nogroup',
+        system_group   => #{group_name},
         system_user    => 'nobody',
         version        => '21.0.0',
       }
