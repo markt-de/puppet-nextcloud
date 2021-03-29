@@ -36,7 +36,11 @@ define nextcloud::config_command (
     default: {
       $cfg_key = $key
       $_occ_cmd = "config:${section}:set"
-      $_occ_args = "${cfg_key} --value=\'${value}\'"
+      if ($value =~ Boolean) {
+        $_occ_args = "${cfg_key} --value=${value} --type=boolean"
+      } else {
+        $_occ_args = "${cfg_key} --value=\'${value}\'"
+      }
       $unless_cmd = join([
         "php occ config:${section}:get",
         $verify_key,

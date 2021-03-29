@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 * Add support for Nextcloud's High Performance Backend (notify_push) ([#5])
 
+### Fixed
+* Do not convert boolean values to strings when passing them to occ
+
 ## [v1.5.0] - 2021-02-26
 
 ### Added
