@@ -274,24 +274,24 @@ class { 'nextcloud':
 ```
 /
 |-- opt/
-| |-- nextcloud@                            # symlink to the current install dir (nextcloud-20.0.4)
-| |-- nextcloud-20.0.3                      # install dir for a previous version (will not be purged)
-| |-- nextcloud-20.0.4                      # install dir for the current version
-| | |-- nextcloud                           # default application folder (extracted from dist archive)
-| |   |-- config
-| |   | |-- config.php@                     # symlink to the real config.php in Nextcloud's data dir
-| |-- nextcloud-data                        # Nextcloud's data directory
-|     |-- .config.php                       # real config.php (hidden file)
-|     |-- .puppet_app.lock                  # indicates that Puppet is currently running a app management command
-|     |-- .puppet_convert_filecache.done    # indicates that Puppet completed the "convert filecache" command
-|     |-- .puppet_dist_initial_install.done # indicates that the initial install of Nextcloud is done
-|     |-- .puppet_missing_indices.done      # indicates that Puppet completed the "missing indices" command
-|     |-- .puppet_update_20.0.3.done        # indicates that an update to version 20.0.3 was performed
-|     |-- .puppet_update_20.0.4.done        # indicates that an update to version 20.0.4 was performed
+|   |-- nextcloud@                            # symlink to the current install dir (nextcloud-20.0.4)
+|   |-- nextcloud-20.0.3                      # install dir for a previous version (will not be purged)
+|   |-- nextcloud-20.0.4                      # install dir for the current version
+|   |   |-- nextcloud                         # default application folder (extracted from dist archive)
+|   |       |-- config
+|   |           |-- config.php@               # symlink to the real config.php in Nextcloud's data dir
+|   |-- nextcloud-data                        # Nextcloud's data directory
+|       |-- .config.php                       # real config.php (hidden file)
+|       |-- .puppet_app.lock                  # indicates that Puppet is currently running a app management command
+|       |-- .puppet_convert_filecache.done    # indicates that Puppet completed the "convert filecache" command
+|       |-- .puppet_dist_initial_install.done # indicates that the initial install of Nextcloud is done
+|       |-- .puppet_missing_indices.done      # indicates that Puppet completed the "missing indices" command
+|       |-- .puppet_update_20.0.3.done        # indicates that an update to version 20.0.3 was performed
+|       |-- .puppet_update_20.0.4.done        # indicates that an update to version 20.0.4 was performed
 |-- var/
-| |-- db/
-|   |-- nextcloud_data                      # contains the path to Nextcloud's data dir (used by custom fact)
-|   |-- nextcloud_home                      # contains the path to Nextcloud's install/home dir (used by custom fact)
+|   |-- db/
+|       |-- nextcloud_data                    # contains the path to Nextcloud's data dir (used by custom fact)
+|       |-- nextcloud_home                    # contains the path to Nextcloud's install/home dir (used by custom fact)
 
 ```
 
