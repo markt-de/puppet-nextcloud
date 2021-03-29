@@ -5,13 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v1.6.0] - 2021-03-29
 
 ### Added
 * Add support for Nextcloud's High Performance Backend (notify_push) ([#5])
 
 ### Fixed
-* Do not convert boolean values to strings when passing them to occ
+* Do not convert boolean config values to strings when passing them to occ
 
 ## [v1.5.0] - 2021-02-26
 
@@ -56,7 +56,8 @@ This release fixes bugs that caused updates to fail.
 ## v1.0.0 - 2021-01-01
 Initial release
 
-[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.6.0...HEAD
+[v1.6.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.3.0...v1.4.0
 [v1.3.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.2.0...v1.3.0
