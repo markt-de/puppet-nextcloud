@@ -7,7 +7,7 @@
 #
 define nextcloud::install::distribution (
   Optional[String] $id = undef,
-){
+) {
   include 'archive'
 
   # NOTE: Extra safekeeping is required to prevent duplicate declaration errors.
@@ -22,8 +22,7 @@ define nextcloud::install::distribution (
   # Check if this job was already completed by looking up the ID in facter.
   # This should ensure that a job is only run once if $id was specified.
   if (($_id == undef) or
-    ($_id and (!('nextcloud_dist_jobs' in $facts) or !($_id in $facts['nextcloud_dist_jobs'])))) {
-
+  ($_id and (!('nextcloud_dist_jobs' in $facts) or !($_id in $facts['nextcloud_dist_jobs'])))) {
     # Create the installation directory for the configured version.
     # This will always be created, even if the archive job is skipped, but it
     # will not do any harm.
@@ -82,14 +81,14 @@ define nextcloud::install::distribution (
           ensure  => link,
           path    => $nextcloud::symlink,
           target  => $nextcloud::distribution_dir,
-          require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"]
+          require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"],
         }
         # Maintain a symlink to the current config file.
         -> file { "Manage config symlink: ${title}":
           ensure  => link,
           path    => $nextcloud::config_symlink,
           target  => $nextcloud::config_file,
-          require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"]
+          require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"],
         }
       }
     }
@@ -102,7 +101,7 @@ define nextcloud::install::distribution (
         content => inline_epp('<%= $nextcloud::symlink %>'),
         owner   => $nextcloud::system_user,
         group   => $nextcloud::system_group,
-        require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"]
+        require => Archive["${nextcloud::installroot}/${nextcloud::archive_name}"],
       }
     }
   }

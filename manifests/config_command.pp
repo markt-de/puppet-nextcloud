@@ -19,7 +19,7 @@ define nextcloud::config_command (
   Variant[Boolean, Integer, String] $verify_value,
   Variant[Boolean, Integer, String] $key = $title,
   Enum['app', 'system']             $section = 'system',
-){
+) {
   # Check if the configuration key should be removed.
   $_key = split($key, /:/)
   case $_key[0] {
@@ -28,9 +28,9 @@ define nextcloud::config_command (
       $_occ_cmd = "config:${section}:delete"
       $_occ_args = $cfg_key
       $unless_cmd = join([
-        "php occ config:${section}:get ${cfg_key}",
-        # Modify the exit code to work with Exec's "unless".
-        '; _exit=$?; test $_exit -gt 0'
+          "php occ config:${section}:get ${cfg_key}",
+          # Modify the exit code to work with Exec's "unless".
+          '; _exit=$?; test $_exit -gt 0',
       ], ' ')
     }
     default: {
@@ -42,10 +42,10 @@ define nextcloud::config_command (
         $_occ_args = "${cfg_key} --value=\'${value}\'"
       }
       $unless_cmd = join([
-        "php occ config:${section}:get",
-        $verify_key,
-        '| grep -qF',
-        "\'${verify_value}\'",
+          "php occ config:${section}:get",
+          $verify_key,
+          '| grep -qF',
+          "\'${verify_value}\'",
       ], ' ')
     }
   }
@@ -53,11 +53,11 @@ define nextcloud::config_command (
   # Commands and files required to update the configuration.
   $config_lock = "${nextcloud::datadir}/.puppet_config.lock"
   $config_cmd = join([
-    "touch ${config_lock}",
-    "&& php occ ${_occ_cmd} ${_occ_args}",
-    '; _exit=$?', # record exit code
-    "; rm -f ${config_lock}", # always remove lock
-    '; test $_exit -lt 1 && true', # pass failures to puppet
+      "touch ${config_lock}",
+      "&& php occ ${_occ_cmd} ${_occ_args}",
+      '; _exit=$?', # record exit code
+      "; rm -f ${config_lock}", # always remove lock
+      '; test $_exit -lt 1 && true', # pass failures to puppet
   ], ' ')
 
   # Run the config command.

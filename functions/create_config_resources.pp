@@ -26,7 +26,7 @@ function nextcloud::create_config_resources(Hash[String, NotUndef] $config_hash,
       }
       Array: {
         $value.each |$idx,$val| {
-          nextcloud::create_config_resources({"${idx}" => $val}, $sections + $key)
+          nextcloud::create_config_resources( { "${idx}" => $val }, $sections + $key)
         }
       }
       default: {

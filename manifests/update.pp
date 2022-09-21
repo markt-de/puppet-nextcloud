@@ -5,7 +5,6 @@ class nextcloud::update {
 
   # Only perform update tasks if this feature is enabled.
   if ($nextcloud::update_enabled =~ Boolean) {
-
     # Get and prepare the distribution files
     nextcloud::install::distribution { "update to ${nextcloud::version}": }
 
@@ -15,10 +14,10 @@ class nextcloud::update {
       $update_lock = "${nextcloud::datadir}/.puppet_update.lock"
       $update_done = "${nextcloud::datadir}/.puppet_update_${nextcloud::version_normalized}.done"
       $update_cmd = join([
-        "touch ${update_lock}",
-        '&& php occ upgrade --no-interaction',
-        "&& touch ${update_done}",
-        "; rm -f ${update_lock}", # always remove lock
+          "touch ${update_lock}",
+          '&& php occ upgrade --no-interaction',
+          "&& touch ${update_done}",
+          "; rm -f ${update_lock}", # always remove lock
       ], ' ')
 
       # Run the update command.
@@ -35,12 +34,12 @@ class nextcloud::update {
 
       # Only run post-update command if update was less than 30 minutes ago.
       $post_update_onlyif = join([
-        "test -f \'${update_done}\'",
-        '&&',
-        'test',
-        "\$( ${nextcloud::stat_expression} \'${update_done}\' )",
-        '-gt',
-        "\$( ${nextcloud::date_expression} )",
+          "test -f \'${update_done}\'",
+          '&&',
+          'test',
+          "\$( ${nextcloud::stat_expression} \'${update_done}\' )",
+          '-gt',
+          "\$( ${nextcloud::date_expression} )",
       ], ' ')
 
       # Run the post-update command.
