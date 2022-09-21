@@ -9,7 +9,7 @@
 define nextcloud::app_command (
   Enum['install','remove','enable','disable','install_disable','post_update'] $command,
   String $app = $title,
-){
+) {
   # Handle special app commands.
   case $command {
     # Install an app but keep it disabled.
@@ -33,12 +33,12 @@ define nextcloud::app_command (
   # Commands and files required for app installation/removal.
   $app_lock = "${nextcloud::datadir}/.puppet_app.lock"
   $app_cmd = join([
-    "touch ${app_lock};",
-    $pre_command,
-    "php occ app:${real_command} ${app}",
-    '; _exit=$?', # record exit code
-    "; rm -f ${app_lock}", # always remove lock
-    '; test $_exit -lt 1 && true', # pass failures to puppet
+      "touch ${app_lock};",
+      $pre_command,
+      "php occ app:${real_command} ${app}",
+      '; _exit=$?', # record exit code
+      "; rm -f ${app_lock}", # always remove lock
+      '; test $_exit -lt 1 && true', # pass failures to puppet
   ], ' ')
 
   # Run the app command.

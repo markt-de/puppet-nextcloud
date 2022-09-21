@@ -10,7 +10,6 @@ class nextcloud::install {
     group  => $nextcloud::system_group,
     before => Nextcloud::Install::Distribution['initial install'],
   }
-
   # Record Nextcloud's datadirectory, so that it can be used by the custom fact.
   file { 'Create data statefile':
     ensure  => file,
@@ -28,7 +27,6 @@ class nextcloud::install {
 
   # Run Nextcloud's installation commands.
   if ($nextcloud::install_enabled) {
-
     # During initial install, also mark the update to the current version
     # as complete. This prevents the updater from running right afterwards.
     $update_done = "${nextcloud::datadir}/.puppet_update_${nextcloud::version_normalized}.done"
@@ -37,23 +35,23 @@ class nextcloud::install {
     $install_lock = "${nextcloud::datadir}/.puppet_install.lock"
     $install_done = "${nextcloud::datadir}/.puppet_install.done"
     $install_cmd = join([
-      "touch ${install_lock}",
-      # Hint: occ commands may fail when using NFS with the "mapall" option.
-      "; php occ maintenance:install --database '${nextcloud::db_driver}'",
-      "--database-host ${nextcloud::db_host}",
-      "--database-name ${nextcloud::db_name}",
-      "--database-user ${nextcloud::db_user}",
-      '--database-pass',
-      shellquote($nextcloud::db_password),
-      "--admin-user ${nextcloud::admin_user}",
-      '--admin-pass',
-      shellquote($nextcloud::admin_password),
-      "--data-dir ${nextcloud::datadir}",
-      "&& touch ${install_done}",
-      "&& touch ${update_done}",
-      '; _exit=$?', # record exit code
-      "; rm -f ${install_lock}", # always remove lock
-      '; test $_exit -lt 1 && true', # pass failures to puppet
+        "touch ${install_lock}",
+        # Hint: occ commands may fail when using NFS with the "mapall" option.
+        "; php occ maintenance:install --database '${nextcloud::db_driver}'",
+        "--database-host ${nextcloud::db_host}",
+        "--database-name ${nextcloud::db_name}",
+        "--database-user ${nextcloud::db_user}",
+        '--database-pass',
+        shellquote($nextcloud::db_password),
+        "--admin-user ${nextcloud::admin_user}",
+        '--admin-pass',
+        shellquote($nextcloud::admin_password),
+        "--data-dir ${nextcloud::datadir}",
+        "&& touch ${install_done}",
+        "&& touch ${update_done}",
+        '; _exit=$?', # record exit code
+        "; rm -f ${install_lock}", # always remove lock
+        '; test $_exit -lt 1 && true', # pass failures to puppet
     ], ' ')
 
     # Run the installation command.
@@ -71,10 +69,10 @@ class nextcloud::install {
     $missing_indices_lock = "${nextcloud::datadir}/.puppet_missing_indices.lock"
     $missing_indices_done = "${nextcloud::datadir}/.puppet_missing_indices.done"
     $missing_indices_cmd = join([
-      "touch ${missing_indices_lock}",
-      '&& php occ db:add-missing-indices --no-interaction',
-      "&& touch ${missing_indices_done}",
-      "; rm -f ${missing_indices_lock}", # always remove lock
+        "touch ${missing_indices_lock}",
+        '&& php occ db:add-missing-indices --no-interaction',
+        "&& touch ${missing_indices_done}",
+        "; rm -f ${missing_indices_lock}", # always remove lock
     ], ' ')
 
     exec { 'occ db:add-missing-indices':
@@ -92,10 +90,10 @@ class nextcloud::install {
     $convert_filecache_lock = "${nextcloud::datadir}/.puppet_convert_filecache.lock"
     $convert_filecache_done = "${nextcloud::datadir}/.puppet_convert_filecache.done"
     $convert_filecache_cmd = join([
-      "touch ${convert_filecache_lock}",
-      '&& php occ db:convert-filecache-bigint --no-interaction',
-      "&& touch ${convert_filecache_done}",
-      "; rm -f ${convert_filecache_lock}", # always remove lock
+        "touch ${convert_filecache_lock}",
+        '&& php occ db:convert-filecache-bigint --no-interaction',
+        "&& touch ${convert_filecache_done}",
+        "; rm -f ${convert_filecache_lock}", # always remove lock
     ], ' ')
 
     exec { 'occ db:convert-filecache-bigint':

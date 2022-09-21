@@ -8,4 +8,4 @@ fixtures:
     "facts": "https://github.com/puppetlabs/puppetlabs-facts.git"
     "provision": "https://github.com/puppetlabs/provision.git"
     "puppet_agent": "https://github.com/puppetlabs/puppetlabs-puppet_agent.git"
-    "stdlib": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib"

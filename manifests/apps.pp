@@ -4,22 +4,19 @@ class nextcloud::apps {
   assert_private()
 
   if ($nextcloud::manage_apps and !empty($nextcloud::apps)) {
-
     # For safekeeping, do not try to manage apps when the fact is empty.
     # This should only be the case during the initial install of Nextcloud.
     if (('nextcloud_apps' in $facts) and !empty($facts['nextcloud_apps'])) {
-
       # Walk through the list of apps.
       $nextcloud::apps.each | $_name, $_config| {
-
         # Get desired app state from config or fallback to default value.
         $_ensure = ($_config =~ Hash and 'ensure' in $_config and
-          $_config['ensure'] =~ Enum['present','absent']) ? {
+        $_config['ensure'] =~ Enum['present','absent']) ? {
           false   => 'present',
           default => $_config['ensure'],
         }
         $_status = ($_config =~ Hash and 'status' in $_config and
-          $_config['status'] =~ Enum['enabled','disabled']) ? {
+        $_config['status'] =~ Enum['enabled','disabled']) ? {
           false   => 'enabled',
           default => $_config['status'],
         }
@@ -29,11 +26,10 @@ class nextcloud::apps {
         # - an update is in progress (the Nextcloud version is not listed as completed update)
         if ($_ensure == 'present'
           and (
-          (!(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
-          and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))
-          ) or !($nextcloud::version_normalized in $facts['nextcloud_updates'])
-          )) {
-
+            (!(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
+              and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))
+            ) or !($nextcloud::version_normalized in $facts['nextcloud_updates'])
+        )) {
           # Special handling when Nextcloud is updated.
           if !($nextcloud::version_normalized in $facts['nextcloud_updates']) {
             $_cmd = 'post_update'
@@ -51,12 +47,11 @@ class nextcloud::apps {
             command => $_cmd,
           }
 
-        # Remove the app if the following conditions are met:
-        # - it is listed in "enabled" or "disabled" apps
+          # Remove the app if the following conditions are met:
+          # - it is listed in "enabled" or "disabled" apps
         } elsif ($_ensure == 'absent'
           and ((('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
-          or (('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled'])))) {
-
+        or (('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled'])))) {
           # App needs to be removed.
           nextcloud::app_command { "remove ${_name}":
             app     => $_name,
@@ -69,18 +64,15 @@ class nextcloud::apps {
         # Ignore apps that are either not installed or should be removed.
         if ($_ensure == 'present' and $_status == 'enabled'
           and !(('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))
-          and (('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))) {
-
+        and (('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))) {
           # App needs to be enabled.
           nextcloud::app_command { "enable ${_name}":
             app     => $_name,
             command => 'enable',
           }
-
         } elsif ($_ensure == 'present' and $_status == 'disabled'
           and !(('disabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['disabled']))
-          and (('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))) {
-
+        and (('enabled' in $facts['nextcloud_apps']) and ($_name in $facts['nextcloud_apps']['enabled']))) {
           # App needs to be disabled.
           nextcloud::app_command { "disable ${_name}":
             app     => $_name,
@@ -91,7 +83,7 @@ class nextcloud::apps {
     } else {
       notify {
         'No Nextcloud apps have been found; app management is disabled for safekeeping. This warning can be ignored on first occurence.':
-          loglevel => warning
+          loglevel => warning,
       }
     }
   }

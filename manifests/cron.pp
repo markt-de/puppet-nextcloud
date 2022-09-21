@@ -5,20 +5,16 @@ class nextcloud::cron {
 
   # Only manage cron jobs if this feature is enabled.
   if ($nextcloud::manage_cron) {
-
     # Iterate over all cron jobs.
     $nextcloud::cronjobs.each | $_cron, $_config| {
-
       # Ignore invalid cron configurations.
       if (($_config =~ Hash) and ('command' in $_config)) {
-
         # Set environment variables.
         if ('environment' in $_config) {
           $_environment = $_config['environment'] + ["PATH=${nextcloud::path}"]
         } else {
           $_environment = ["PATH=${nextcloud::path}"]
         }
-
         # Add Nextcloud's installation directory to the command.
         $_cmd = sprintf($_config['command'], $nextcloud::symlink)
 

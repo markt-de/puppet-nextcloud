@@ -1,21 +1,16 @@
 {
   "name": "fraenki-nextcloud",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "author": "markt.de",
   "summary": "Install and configure Nextcloud",
   "license": "BSD-2-Clause",
   "source": "https://github.com/markt-de/puppet-nextcloud",
   "project_page": "https://github.com/markt-de/puppet-nextcloud",
   "issues_url": "https://github.com/markt-de/puppet-nextcloud/issues",
-  "tags": [
-    "nextcloud",
-    "cloud",
-    "gdpr"
-  ],
   "dependencies": [
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 4.0.0 < 5.0.0"
+      "version_requirement": ">= 5.0.0 < 7.0.0"
     },
     {
       "name": "puppetlabs/cron_core",
@@ -23,39 +18,43 @@
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 6.0.0 < 7.0.0"
+      "version_requirement": ">= 7.0.0 < 9.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "8"
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "8"
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10"
+        "10",
+        "11"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "18.04",
-        "20.04"
+        "20.04",
+        "22.04"
       ]
     },
     {
       "operatingsystem": "FreeBSD",
       "operatingsystemrelease": [
-        "12"
+        "13"
       ]
     }
   ],
@@ -65,7 +64,12 @@
       "version_requirement": ">= 6.0.0 < 8.0.0"
     }
   ],
-  "pdk-version": "1.18.1",
-  "template-url": "pdk-default#1.18.1",
-  "template-ref": "tags/1.18.1-0-g3d2e75c"
+  "tags": [
+    "nextcloud",
+    "cloud",
+    "gdpr"
+  ],
+  "pdk-version": "2.5.0",
+  "template-url": "pdk-default#2.5.0",
+  "template-ref": "tags/2.5.0-0-g369d483"
 }
