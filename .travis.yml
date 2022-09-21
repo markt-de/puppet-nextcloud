@@ -28,28 +28,12 @@ jobs:
   fast_finish: true
   include:
     -
-      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
+      env: CHECK="validate lint check rubocop"
       stage: static
-    -
-      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
-      rvm: 2.4.5
-      stage: spec
     -
       env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
       rvm: 2.5.7
       stage: spec
-    -
-      before_script:
-      - "bundle exec rake 'litmus:provision_list[travis_el8]'"
-      - "bundle exec rake 'litmus:install_agent[puppet6]'"
-      - "bundle exec rake litmus:install_module"
-      bundler_args:
-      dist: xenial
-      env: PLATFORMS=travis_el8_puppet6
-      rvm: 2.5.3
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
     -
       env: DEPLOY_TO_FORGE=yes
       stage: deploy
