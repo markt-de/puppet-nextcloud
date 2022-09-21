@@ -6,6 +6,9 @@ fixtures:
     "archive": "https://github.com/voxpupuli/puppet-archive.git"
     "cron_core": "https://github.com/puppetlabs/puppetlabs-cron_core.git"
     "facts": "https://github.com/puppetlabs/puppetlabs-facts.git"
+    "php": "https://github.com/voxpupuli/puppet-php.git"
     "provision": "https://github.com/puppetlabs/provision.git"
     "puppet_agent": "https://github.com/puppetlabs/puppetlabs-puppet_agent.git"
     "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib"
+  symlinks:
+    nextcloud: "#{source_dir}"
