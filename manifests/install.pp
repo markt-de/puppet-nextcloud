@@ -37,7 +37,7 @@ class nextcloud::install {
     $install_cmd = join([
         "touch ${install_lock}",
         # Hint: occ commands may fail when using NFS with the "mapall" option.
-        "; php occ maintenance:install --database '${nextcloud::db_driver}'",
+        "&& php occ maintenance:install --database '${nextcloud::db_driver}'",
         "--database-host ${nextcloud::db_host}",
         "--database-name ${nextcloud::db_name}",
         "--database-user ${nextcloud::db_user}",
