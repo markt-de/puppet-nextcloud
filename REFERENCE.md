@@ -344,8 +344,8 @@ Data type: `Optional[String]`
 
 Optional parameter to specify the FQDN of the host where all critical
 operations should be performed. This includes operations such as the
-initial installation and consecutive update installations. Limiting these
-operations to a single host should prevent (rare) race conditions.
+initial installation, update installations and all app commands.
+Limiting these operations to a single host should prevent race conditions.
 
 Default value: ``undef``
 
