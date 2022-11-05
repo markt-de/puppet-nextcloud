@@ -83,7 +83,8 @@ This release fixes bugs that caused updates to fail.
 ## v1.0.0 - 2021-01-01
 Initial release
 
-[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.1...HEAD
+[v1.8.1]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.0...v1.8.1
 [v1.8.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.7.0...v1.8.0
 [v1.7.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.6.0...v1.7.0
 [v1.6.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.5.0...v1.6.0
