@@ -302,6 +302,17 @@ installation directory to a newer version, it just skips the execution of
 Nextcloud's update commands. To completely disable all updates, the parameter
 should be set to `none` (not recommended).
 
+##### `update_host`
+
+Data type: `Optional[String]`
+
+Optional parameter to specify the FQDN of the host where all critical
+operations should be performed. This includes operations such as the
+initial installation and consecutive update installations. Limiting these
+operations to a single host should prevent (rare) race conditions.
+
+Default value: ``undef``
+
 ##### `version`
 
 Data type: `String`

@@ -60,4 +60,5 @@ nextcloud::stat_expression: "stat -c '%Y'"
 nextcloud::statefile: '/var/db/nextcloud_home'
 nextcloud::symlink_name: 'nextcloud'
 nextcloud::update_enabled: true
+nextcloud::update_host: ~
 nextcloud::version: ~
