@@ -24,6 +24,8 @@ describe 'nextcloud' do
         it { is_expected.to contain_class('nextcloud::app_config') }
         it { is_expected.to contain_class('nextcloud::cron') }
 
+        it { is_expected.to contain_nextcloud__install__distribution('initial install') }
+
         it { is_expected.to contain_file('/opt/nextcloud-data').with_ensure('directory') }
         it { is_expected.to contain_file('Create install dir: initial install').with_ensure('directory') }
 
@@ -34,6 +36,21 @@ describe 'nextcloud' do
             minute: '*/5',
           )
         }
+      end
+      context 'when specifying update_host' do
+        let(:params) do
+          {
+            admin_password: 'secret',
+            db_password: 'secret',
+            update_host: 'DOES_NOT_MATCH_FQDN',
+            version: '20.0.4',
+          }
+        end
+
+        it { is_expected.to compile }
+
+        it { is_expected.not_to contain_nextcloud__install__distribution('initial install') }
+        it { is_expected.not_to contain_file('Create install dir: initial install').with_ensure('directory') }
       end
     end
   end
