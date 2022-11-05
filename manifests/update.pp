@@ -54,7 +54,7 @@ class nextcloud::update {
     exec { 'post-update command':
       command   => $nextcloud::post_update_cmd,
       path      => $nextcloud::path,
-      cwd       => $nextcloud::distribution_dir,
+      cwd       => $nextcloud::symlink,
       onlyif    => $post_update_onlyif,
       logoutput => $nextcloud::debug,
     }
