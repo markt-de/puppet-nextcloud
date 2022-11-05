@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 * Add new parameter `$update_host`
+* Add documentation for all parameters
 
 ## [v1.7.0] - 2022-09-21
 

@@ -43,6 +43,21 @@
 #   A date command that will be used when checking if `$post_update_cmd`
 #   should be executed.
 #
+# @param db_driver
+#   The database driver that Nextcloud should use.
+#
+# @param db_host
+#   The database host that Nextcloud should use.
+#
+# @param db_name
+#   The database name that Nextcloud should use.
+#
+# @param db_password
+#   The database password that Nextcloud should use.
+#
+# @param db_user
+#   The database user that Nextcloud should use.
+#
 # @param debug
 #   Whether to enable additional output for debugging purposes.
 #
@@ -60,6 +75,9 @@
 #
 # @param hpb_service_config_file
 #   Specifies the full path to the HPB service config file.
+#
+# @param hpb_service_ensure
+#   Specifies the desired state of the HPB service.
 #
 # @param hpb_service_file
 #   Specifies the full path to the HPB service definition / startup script.

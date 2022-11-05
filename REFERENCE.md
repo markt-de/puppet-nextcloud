@@ -114,6 +114,36 @@ Data type: `String`
 A date command that will be used when checking if `$post_update_cmd`
 should be executed.
 
+##### `db_driver`
+
+Data type: `String`
+
+The database driver that Nextcloud should use.
+
+##### `db_host`
+
+Data type: `String`
+
+The database host that Nextcloud should use.
+
+##### `db_name`
+
+Data type: `String`
+
+The database name that Nextcloud should use.
+
+##### `db_password`
+
+Data type: `String`
+
+The database password that Nextcloud should use.
+
+##### `db_user`
+
+Data type: `String`
+
+The database user that Nextcloud should use.
+
 ##### `debug`
 
 Data type: `Boolean`
@@ -149,6 +179,12 @@ Specifies the port for the HPB service.
 Data type: `Stdlib::Compat::Absolute_path`
 
 Specifies the full path to the HPB service config file.
+
+##### `hpb_service_ensure`
+
+Data type: `Enum['running', 'stopped']`
+
+Specifies the desired state of the HPB service.
 
 ##### `hpb_service_file`
 
@@ -319,42 +355,6 @@ Data type: `String`
 
 Specifies the version of Nextcloud that should be installed.
 
-##### `db_driver`
-
-Data type: `String`
-
-
-
-##### `db_host`
-
-Data type: `String`
-
-
-
-##### `db_name`
-
-Data type: `String`
-
-
-
-##### `db_password`
-
-Data type: `String`
-
-
-
-##### `db_user`
-
-Data type: `String`
-
-
-
-##### `hpb_service_ensure`
-
-Data type: `Enum['running', 'stopped']`
-
-
-
 ## Defined types
 
 ### `nextcloud::app_command`
@@ -396,6 +396,14 @@ then the key will be completely removed from configuration.
 
 Default value: `$title`
 
+##### `section`
+
+Data type: `Enum['app', 'system']`
+
+Specifies whether it is a system or app configuration value.
+
+Default value: `'system'`
+
 ##### `value`
 
 Data type: `Variant[Boolean, Integer, String]`
@@ -413,14 +421,6 @@ The configuration key to find out whether it needs to be altered.
 Data type: `Variant[Boolean, Integer, String]`
 
 The configuration verify to find out whether it needs to be altered.
-
-##### `section`
-
-Data type: `Enum['app', 'system']`
-
-
-
-Default value: `'system'`
 
 ### `nextcloud::install::distribution`
 

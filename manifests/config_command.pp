@@ -4,6 +4,9 @@
 #   The configuration key that should be altered. If prefixed with `DELETE:`
 #   then the key will be completely removed from configuration.
 #
+# @param section
+#   Specifies whether it is a system or app configuration value.
+#
 # @param value
 #   The configuration value that should be set.
 #
