@@ -14,6 +14,7 @@
     - [Managing Apps](#managing-apps)
     - [Configuring Apps](#configuring-apps)
     - [Performing Updates](#performing-updates)
+    - [Multiple Servers](#multiple-servers)
     - [High Performance Backend](#high-performance-backend)
     - [High Availability](#high-availability)
     - [Directory Structure](#directory-structure)
@@ -222,7 +223,8 @@ The module will automatically perform updates of Nextcloud when the value of `$v
 
 ```puppet
 class { 'nextcloud':
-  post_update_cmd => 'systemctl restart php-fpm'
+  update_enabled  => true,
+  post_update_cmd => 'systemctl restart php-fpm',
   ...
 }
 ```
@@ -234,6 +236,20 @@ Nextcloud's native upgrade command will also be utilized, but depending on the s
 The old installation folder will be preserved. In theory, it should be possible to revert to the previous version if no incompatible (database) change was involved. The official Nextcloud documentation should provide more details.
 
 However, it must be ensured that the upgrade path is supported by Nextcloud prior to attempting an update. Besides that performing a full backup periodically is strongly advised.
+
+### Multiple Servers
+
+When using more than one server for the same Nextcloud instance, the following parameter should be set to improve overall stability:
+
+```puppet
+class { 'nextcloud':
+  update_enabled => true,
+  update_host    => 'main-host-fqdn.example.com',
+  ...
+}
+```
+
+This ensures that all critical operations are only performed on the specified host.
 
 ### High Performance Backend
 
