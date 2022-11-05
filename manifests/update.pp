@@ -49,7 +49,8 @@ class nextcloud::update {
         "\$( ${nextcloud::date_expression} )",
     ], ' ')
 
-    # Run the post-update command.
+    # Run the post-update command. These commands are expected to run
+    # on all hosts (not just on $update_host).
     exec { 'post-update command':
       command   => $nextcloud::post_update_cmd,
       path      => $nextcloud::path,

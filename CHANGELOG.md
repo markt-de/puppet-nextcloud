@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 * Only extract the Nextcloud tarball when `$install_enabled` is set to `true`
 
+### Fixed
+* Post update command was not run if `$update_enabled` was set to `false`
+
 ## [v1.7.0] - 2022-09-21
 
 ### Changed
