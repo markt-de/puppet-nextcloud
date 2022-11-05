@@ -8,8 +8,8 @@ class nextcloud::install {
     ensure => directory,
     owner  => $nextcloud::system_user,
     group  => $nextcloud::system_group,
-    before => Nextcloud::Install::Distribution['initial install'],
   }
+
   # Record Nextcloud's datadirectory, so that it can be used by the custom fact.
   file { 'Create data statefile':
     ensure  => file,
@@ -19,17 +19,19 @@ class nextcloud::install {
     group   => $nextcloud::system_group,
   }
 
-  # Perform initial installation of all required files and directories.
-  # This is essential for this module so it cannot be disabled.
-  nextcloud::install::distribution { 'initial install':
-    id => 'initial_install',
-  }
-
-  # Run Nextcloud's installation commands.
+  # Nextcloud installation.
   if ($nextcloud::install_enabled) {
     # Check if this is the designated update/install host.
     if (($nextcloud::update_host == undef or empty($nextcloud::update_host))
     or ($nextcloud::update_host == $facts['networking']['fqdn'])) {
+      # Perform initial installation of all required files and directories.
+      nextcloud::install::distribution { 'initial install':
+        id      => 'initial_install',
+        require => [
+          File[$nextcloud::datadir],
+        ],
+      }
+
       # During initial install, also mark the update to the current version
       # as complete. This prevents the updater from running right afterwards.
       $update_done = "${nextcloud::datadir}/.puppet_update_${nextcloud::version_normalized}.done"

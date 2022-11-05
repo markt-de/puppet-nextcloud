@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Add new parameter `$update_host`
 * Add documentation for all parameters
 
+### Changed
+* Only extract the Nextcloud tarball when `$install_enabled` is set to `true`
+
 ## [v1.7.0] - 2022-09-21
 
 ### Changed
