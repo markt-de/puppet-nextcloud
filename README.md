@@ -1,8 +1,8 @@
 # puppet-nextcloud
 
-[![Build Status](https://travis-ci.org/markt-de/puppet-nextcloud.png?branch=main)](https://travis-ci.org/markt-de/puppet-nextcloud)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/fraenki/nextcloud.svg)](https://forge.puppetlabs.com/fraenki/nextcloud)
-[![Puppet Forge](https://img.shields.io/puppetforge/dt/fraenki/nextcloud.svg)](https://forge.puppetlabs.com/fraenki/nextcloud)
+[![Build Status](https://github.com/markt-de/puppet-nextcloud/actions/workflows/ci.yaml/badge.svg)](https://github.com/markt-de/puppet-nextcloud/actions/workflows/ci.yaml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/markt/nextcloud.svg)](https://forge.puppetlabs.com/markt/nextcloud)
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/markt/nextcloud.svg)](https://forge.puppetlabs.com/markt/nextcloud)
 
 #### Table of Contents
 
