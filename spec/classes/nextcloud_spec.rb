@@ -28,6 +28,7 @@ describe 'nextcloud' do
 
         it { is_expected.to contain_file('/opt/nextcloud-data').with_ensure('directory') }
         it { is_expected.to contain_file('Create install dir: initial install').with_ensure('directory') }
+        it { is_expected.to contain_archive('Extract archive: initial install') }
 
         it {
           is_expected.to contain_cron('Nextcloud background job').with(
@@ -51,6 +52,44 @@ describe 'nextcloud' do
 
         it { is_expected.not_to contain_nextcloud__install__distribution('initial install') }
         it { is_expected.not_to contain_file('Create install dir: initial install').with_ensure('directory') }
+        it { is_expected.not_to contain_archive('Extract archive: update to 20.0.4') }
+      end
+      context 'when install_enabled=false' do
+        let(:params) do
+          {
+            admin_password: 'secret',
+            db_password: 'secret',
+            install_enabled: false,
+            version: '20.0.4',
+          }
+        end
+
+        it { is_expected.to compile }
+
+        it { is_expected.not_to contain_nextcloud__install__distribution('initial install') }
+        it { is_expected.not_to contain_file('Create install dir: initial install').with_ensure('directory') }
+
+        it { is_expected.not_to contain_nextcloud__install__distribution('update to 20.0.4') }
+        it { is_expected.not_to contain_archive('Extract archive: update to 20.0.4') }
+        it { is_expected.not_to contain_exec('occ upgrade') }
+      end
+      context 'when update_enabled=false' do
+        let(:params) do
+          {
+            admin_password: 'secret',
+            db_password: 'secret',
+            update_enabled: false,
+            version: '20.0.4',
+          }
+        end
+
+        it { is_expected.to compile }
+
+        it { is_expected.to contain_nextcloud__install__distribution('initial install') }
+        it { is_expected.to contain_file('Create install dir: initial install').with_ensure('directory') }
+        it { is_expected.to contain_nextcloud__install__distribution('update to 20.0.4') }
+
+        it { is_expected.not_to contain_exec('occ upgrade') }
       end
     end
   end

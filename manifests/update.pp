@@ -3,18 +3,18 @@
 class nextcloud::update {
   assert_private()
 
-  # Only perform update tasks if this feature is enabled.
-  if ($nextcloud::update_enabled =~ Boolean) {
-    # Commands and files required when performing an update.
-    $update_lock = "${nextcloud::datadir}/.puppet_update.lock"
-    $update_done = "${nextcloud::datadir}/.puppet_update_${nextcloud::version_normalized}.done"
-    $update_cmd = join([
-        "touch ${update_lock}",
-        '&& php occ upgrade --no-interaction',
-        "&& touch ${update_done}",
-        "; rm -f ${update_lock}", # always remove lock
-    ], ' ')
+  # Commands and files required when performing an update.
+  $update_lock = "${nextcloud::datadir}/.puppet_update.lock"
+  $update_done = "${nextcloud::datadir}/.puppet_update_${nextcloud::version_normalized}.done"
+  $update_cmd = join([
+      "touch ${update_lock}",
+      '&& php occ upgrade --no-interaction',
+      "&& touch ${update_done}",
+      "; rm -f ${update_lock}", # always remove lock
+  ], ' ')
 
+  # Only perform update tasks if this feature is enabled.
+  if ($nextcloud::install_enabled and $nextcloud::update_enabled =~ Boolean) {
     # Check if this is the designated update/install host.
     if (($nextcloud::update_host == undef or empty($nextcloud::update_host))
     or ($nextcloud::update_host == $facts['networking']['fqdn'])) {
