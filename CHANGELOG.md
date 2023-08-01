@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.10.0] - 2023-08-01
+
+### Changed
+* Update module dependencies
+
+### Fixed
+* Parameter `$install_enabled` is ignored (treated as always true) ([#11])
+
 ## [v1.9.0] - 2023-07-25
 
 ### Changed
@@ -103,7 +111,8 @@ This release fixes bugs that caused updates to fail.
 ## v1.0.0 - 2021-01-01
 Initial release
 
-[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.9.0...HEAD
+[Unreleased]: https://github.com/markt-de/puppet-nextcloud/compare/v1.10.0...HEAD
+[v1.10.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.9.0...v1.10.0
 [v1.9.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.3...v1.9.0
 [v1.8.3]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.2...v1.8.3
 [v1.8.2]: https://github.com/markt-de/puppet-nextcloud/compare/v1.8.1...v1.8.2
@@ -116,6 +125,7 @@ Initial release
 [v1.3.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/markt-de/puppet-nextcloud/compare/v1.0.0...v1.1.0
+[#11]: https://github.com/markt-de/puppet-nextcloud/pull/11
 [#5]: https://github.com/markt-de/puppet-nextcloud/pull/5
 [#4]: https://github.com/markt-de/puppet-nextcloud/pull/4
 [#3]: https://github.com/markt-de/puppet-nextcloud/pull/3
