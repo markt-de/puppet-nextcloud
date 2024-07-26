@@ -29,11 +29,10 @@ hierarchy:
     path: "common.yaml"
 EOS
 
-# rubocop:disable all
-hiera_data_content = if os[:family].eql?('debian')
-<<-EOS
+if os[:family].eql?('debian')
+  if os[:release].to_i == 11
+    hiera_data_content = <<-EOS
 ---
-# Created by puppet litmus
 php::composer: true
 php::extensions:
   bcmath: {}
@@ -55,11 +54,60 @@ php::settings:
   'PHP/memory_limit': '768M'
 php::globals::php_version: '7.4'
 mysql::server::root_password: 'strongpassword'
-EOS
-elsif os[:family].eql?('ubuntu')
-<<-EOS
+    EOS
+  elsif os[:release].to_i == 12
+    hiera_data_content = <<-EOS
 ---
-# Created by puppet litmus
+php::composer: true
+php::extensions:
+  bcmath: {}
+  dba: {}
+  gd: {}
+  gmp: {}
+  intl: {}
+  ldap: {}
+  mbstring: {}
+  mysqlnd: {}
+  opcache: {}
+  pdo: {}
+  xml: {}
+  zip: {}
+php::fpm: false
+php::manage_repos: false
+php::settings:
+  'PHP/memory_limit': '768M'
+php::globals::php_version: '8.2'
+mysql::server::root_password: 'strongpassword'
+    EOS
+  end
+elsif os[:family].eql?('ubuntu')
+  if os[:release].to_i == 20
+    hiera_data_content = <<-EOS
+---
+php::composer: true
+php::extensions:
+  bcmath: {}
+  dba: {}
+  gd: {}
+  gmp: {}
+  intl: {}
+  ldap: {}
+  mbstring: {}
+  mysqlnd: {}
+  opcache: {}
+  pdo: {}
+  xml: {}
+  zip: {}
+php::fpm: false
+php::manage_repos: false
+php::settings:
+  'PHP/memory_limit': '768M'
+php::globals::php_version: '7.4'
+mysql::server::root_password: 'strongpassword'
+    EOS
+  elsif os[:release].to_i == 22
+    hiera_data_content = <<-EOS
+---
 php::composer: true
 php::extensions:
   bcmath: {}
@@ -80,11 +128,35 @@ php::settings:
   'PHP/memory_limit': '768M'
 php::globals::php_version: '8.1'
 mysql::server::root_password: 'strongpassword'
-EOS
-else
-<<-EOS
+    EOS
+  elsif os[:release].to_i == 24
+    hiera_data_content = <<-EOS
 ---
-# Created by puppet litmus
+php::composer: true
+php::extensions:
+  bcmath: {}
+  dba: {}
+  gd: {}
+  gmp: {}
+  intl: {}
+  ldap: {}
+  mbstring: {}
+  mysqlnd: {}
+  opcache: {}
+  pdo: {}
+  xml: {}
+  zip: {}
+php::fpm: false
+php::manage_repos: false
+php::settings:
+  'PHP/memory_limit': '768M'
+php::globals::php_version: '8.3'
+mysql::server::root_password: 'strongpassword'
+    EOS
+  end
+else
+  hiera_data_content = <<-EOS
+---
 php::composer: true
 php::extensions:
   bcmath: {}
@@ -107,9 +179,8 @@ php::settings:
   'PHP/memory_limit': '768M'
 php::globals::php_version: '7.4'
 mysql::server::root_password: 'strongpassword'
-EOS
+  EOS
 end
-# rubocop:enable all
 
 setup_php_pp = <<-EOS
 if (($facts['os']['family'] == 'RedHat') and ($facts['os']['release']['major'] == '8')) {
