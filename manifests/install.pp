@@ -10,6 +10,16 @@ class nextcloud::install {
     group  => $nextcloud::system_group,
   }
 
+  if ($facts['os']['family'] == 'Debian') or ($facts['os']['family'] == 'Ubuntu') {
+    file { '/var/db':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+      before => File['Create data statefile'],
+    }
+  }
+
   # Record Nextcloud's datadirectory, so that it can be used by the custom fact.
   file { 'Create data statefile':
     ensure  => file,
