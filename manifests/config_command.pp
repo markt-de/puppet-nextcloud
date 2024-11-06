@@ -17,9 +17,9 @@
 #   The configuration verify to find out whether it needs to be altered.
 #
 define nextcloud::config_command (
-  Variant[Boolean, Integer, String] $value,
+  Variant[Boolean, Float, Integer, String] $value,
   Variant[Boolean, Integer, String] $verify_key,
-  Variant[Boolean, Integer, String] $verify_value,
+  Variant[Boolean, Float, Integer, String] $verify_value,
   Variant[Boolean, Integer, String] $key = $title,
   Enum['app', 'system']             $section = 'system',
 ) {
@@ -44,7 +44,12 @@ define nextcloud::config_command (
         $_occ_cmd = "config:${section}:set"
         if ($value =~ Boolean) {
           $_occ_args = "${cfg_key} --value=${value} --type=boolean"
+        } elsif ($value =~ Integer) {
+          $_occ_args = "${cfg_key} --value=${value} --type=integer"
+        } elsif ($value =~ Float) {
+          $_occ_args = "${cfg_key} --value=${value} --type=float"
         } else {
+          # Everything else is a string.
           $_occ_args = "${cfg_key} --value=\'${value}\'"
         }
         $unless_cmd = join([
