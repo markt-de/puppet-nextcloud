@@ -52,7 +52,7 @@ A small number of parameters are required to setup Nextcloud:
 class { 'nextcloud':
   admin_password => 'suPeRseCreT',
   db_password    => 'secRetPasSwOrd',
-  version        => '20.0.4',
+  version        => '30.0.1',
 }
 ```
 
@@ -280,7 +280,7 @@ class { 'nextcloud':
   datadir      => '/opt/nextcloud-data',
   installroot  => '/opt',
   symlink_name => 'nextcloud',
-  version      => '20.0.4',
+  version      => '30.0.1',
 }
 ```
 
@@ -290,9 +290,9 @@ class { 'nextcloud':
 ```
 /
 |-- opt/
-|   |-- nextcloud@                            # symlink to the current install dir (nextcloud-20.0.4)
-|   |-- nextcloud-20.0.3                      # install dir for a previous version (will not be purged)
-|   |-- nextcloud-20.0.4                      # install dir for the current version
+|   |-- nextcloud@                            # symlink to the current install dir (nextcloud-30.0.1)
+|   |-- nextcloud-30.0.0                      # install dir for a previous version (will not be purged)
+|   |-- nextcloud-30.0.1                      # install dir for the current version
 |   |   |-- nextcloud                         # default application folder (extracted from dist archive)
 |   |       |-- config
 |   |           |-- config.php@               # symlink to the real config.php in Nextcloud's data dir
@@ -302,8 +302,8 @@ class { 'nextcloud':
 |       |-- .puppet_convert_filecache.done    # indicates that Puppet completed the "convert filecache" command
 |       |-- .puppet_dist_initial_install.done # indicates that the initial install of Nextcloud is done
 |       |-- .puppet_missing_indices.done      # indicates that Puppet completed the "missing indices" command
-|       |-- .puppet_update_20.0.3.done        # indicates that an update to version 20.0.3 was performed
-|       |-- .puppet_update_20.0.4.done        # indicates that an update to version 20.0.4 was performed
+|       |-- .puppet_update_30.0.0.done        # indicates that an update to version 30.0.0 was performed
+|       |-- .puppet_update_30.0.1.done        # indicates that an update to version 30.0.1 was performed
 |-- var/
 |   |-- db/
 |       |-- nextcloud_data                    # contains the path to Nextcloud's data dir (used by custom fact)
@@ -311,7 +311,7 @@ class { 'nextcloud':
 
 ```
 
-In this example, Nextcloud was initially installed with version 20.0.3 and later updated to version 20.0.4.
+In this example, Nextcloud was initially installed with version 30.0.0 and later updated to version 30.0.1.
 
 The suffix `.done` indicates that this file is used by the module to identify completed jobs.
 
@@ -332,8 +332,3 @@ Please use the GitHub issues functionality to report any bugs or requests for ne
 ### Acknowledgement
 
 This module was heavily inspired by [adullact/nextcloud](https://forge.puppet.com/modules/adullact/nextcloud), which was written by Fabien Combernous. Many features would not be available without his hard work.
-
-## License
-
-Copyright 2020 Frank Wall
-

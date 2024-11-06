@@ -10,7 +10,7 @@ describe 'nextcloud' do
           {
             admin_password: 'secret',
             db_password: 'secret',
-            version: '20.0.4',
+            version: '30.0.1',
           }
         end
 
@@ -44,7 +44,7 @@ describe 'nextcloud' do
             admin_password: 'secret',
             db_password: 'secret',
             update_host: 'DOES_NOT_MATCH_FQDN',
-            version: '20.0.4',
+            version: '30.0.1',
           }
         end
 
@@ -52,7 +52,7 @@ describe 'nextcloud' do
 
         it { is_expected.not_to contain_nextcloud__install__distribution('initial install') }
         it { is_expected.not_to contain_file('Create install dir: initial install').with_ensure('directory') }
-        it { is_expected.not_to contain_archive('Extract archive: update to 20.0.4') }
+        it { is_expected.not_to contain_archive('Extract archive: update to 30.0.1') }
       end
       context 'when install_enabled=false' do
         let(:params) do
@@ -60,7 +60,7 @@ describe 'nextcloud' do
             admin_password: 'secret',
             db_password: 'secret',
             install_enabled: false,
-            version: '20.0.4',
+            version: '30.0.1',
           }
         end
 
@@ -69,8 +69,8 @@ describe 'nextcloud' do
         it { is_expected.not_to contain_nextcloud__install__distribution('initial install') }
         it { is_expected.not_to contain_file('Create install dir: initial install').with_ensure('directory') }
 
-        it { is_expected.not_to contain_nextcloud__install__distribution('update to 20.0.4') }
-        it { is_expected.not_to contain_archive('Extract archive: update to 20.0.4') }
+        it { is_expected.not_to contain_nextcloud__install__distribution('update to 30.0.1') }
+        it { is_expected.not_to contain_archive('Extract archive: update to 30.0.1') }
         it { is_expected.not_to contain_exec('occ upgrade') }
       end
       context 'when update_enabled=false' do
@@ -79,7 +79,7 @@ describe 'nextcloud' do
             admin_password: 'secret',
             db_password: 'secret',
             update_enabled: false,
-            version: '20.0.4',
+            version: '30.0.1',
           }
         end
 
@@ -87,7 +87,7 @@ describe 'nextcloud' do
 
         it { is_expected.to contain_nextcloud__install__distribution('initial install') }
         it { is_expected.to contain_file('Create install dir: initial install').with_ensure('directory') }
-        it { is_expected.to contain_nextcloud__install__distribution('update to 20.0.4') }
+        it { is_expected.to contain_nextcloud__install__distribution('update to 30.0.1') }
 
         it { is_expected.not_to contain_exec('occ upgrade') }
       end

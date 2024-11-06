@@ -24,7 +24,7 @@ describe 'nextcloud class' do
         system_user    => 'nobody',
         # The post-update command would break the idempotency test.
         update_enabled => 'none',
-        version        => '24.0.6',
+        version        => '30.0.1',
       }
       EOS
 
