@@ -27,6 +27,11 @@
 # @param config
 #   A hash containing configuration options for Nextcloud.
 #
+# @param cron_host
+#   Optional parameter to specify the FQDN of the host where all cronjobs
+#   should run. Limiting these commands to a single host should prevent
+#   race conditions.
+#
 # @param cronjobs
 #   Specifies a list of cron jobs that should be added when
 #   `$manage_cron` is enabled.
@@ -220,6 +225,7 @@ class nextcloud (
   String $system_user,
   Variant[Boolean, Enum['none']] $update_enabled,
   String $version,
+  Optional[String] $cron_host = undef,
   Optional[String] $update_host = undef,
 ) {
   # Merge configuration options.

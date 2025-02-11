@@ -245,6 +245,7 @@ When using more than one server for the same Nextcloud instance, the following p
 class { 'nextcloud':
   update_enabled => true,
   update_host    => 'main-host-fqdn.example.com',
+  cron_host      => 'main-host-fqdn.example.com',
   ...
 }
 ```

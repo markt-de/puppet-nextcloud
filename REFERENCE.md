@@ -86,6 +86,16 @@ Data type: `Hash`
 
 A hash containing configuration options for Nextcloud.
 
+##### `cron_host`
+
+Data type: `Optional[String]`
+
+Optional parameter to specify the FQDN of the host where all cronjobs
+should run. Limiting these commands to a single host should prevent
+race conditions.
+
+Default value: ``undef``
+
 ##### `cronjobs`
 
 Data type: `Hash`
@@ -95,14 +105,14 @@ Specifies a list of cron jobs that should be added when
 
 ##### `datadir`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 Specifies the directory where Nextcloud will store user data.
 It MUST reside outside of Nextcloud's installation directory.
 
 ##### `datastatefile`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 A file that is required by the module to work properly. This value MUST NOT
 be changed, because the path is hardcoded in several places.
@@ -164,7 +174,7 @@ Specifies the relative path to the binary of the HPB app.
 
 ##### `hpb_pidfile`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 Specifies the PID file for the HPB service.
 
@@ -176,7 +186,7 @@ Specifies the port for the HPB service.
 
 ##### `hpb_service_config_file`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 Specifies the full path to the HPB service config file.
 
@@ -188,7 +198,7 @@ Specifies the desired state of the HPB service.
 
 ##### `hpb_service_file`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 Specifies the full path to the HPB service definition / startup script.
 
@@ -215,7 +225,7 @@ run manually and some features may not work as expected (not recommended).
 
 ##### `installroot`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 Specifies the base directory where Nextcloud should be installed. A new
 subdirectory for each version will be created.
@@ -299,7 +309,7 @@ should be executed.
 
 ##### `statefile`
 
-Data type: `Stdlib::Compat::Absolute_path`
+Data type: `Stdlib::Absolutepath`
 
 A file that is required by the module to work properly. This value MUST NOT
 be changed, because the path is hardcoded in several places.
@@ -406,7 +416,7 @@ Default value: `'system'`
 
 ##### `value`
 
-Data type: `Variant[Boolean, Integer, String]`
+Data type: `Variant[Boolean, Float, Integer, String]`
 
 The configuration value that should be set.
 
@@ -418,7 +428,7 @@ The configuration key to find out whether it needs to be altered.
 
 ##### `verify_value`
 
-Data type: `Variant[Boolean, Integer, String]`
+Data type: `Variant[Boolean, Float, Integer, String]`
 
 The configuration verify to find out whether it needs to be altered.
 

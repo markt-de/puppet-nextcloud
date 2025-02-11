@@ -9,6 +9,7 @@ nextcloud::config:
     - 'localhost'
     - "%{facts.networking.fqdn}"
   filelocking.enabled: true
+nextcloud::cron_host: ~
 nextcloud::cronjobs:
   'Nextcloud background job':
     command: "php -f %%{}s/cron.php >/dev/null 2>&1"
