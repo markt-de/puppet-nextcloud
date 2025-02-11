@@ -1,6 +1,6 @@
 {
   "name": "markt-nextcloud",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "author": "markt.de",
   "summary": "Install and configure Nextcloud",
   "license": "BSD-2-Clause",
