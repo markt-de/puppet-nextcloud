@@ -78,6 +78,7 @@ class nextcloud::install {
         onlyif    => "test ! -f ${install_lock}",
         user      => $nextcloud::system_user,
         logoutput => $nextcloud::debug,
+        timeout   => $nextcloud::exec_timeout,
         require   => Nextcloud::Install::Distribution['initial install'],
       }
 
@@ -100,6 +101,7 @@ class nextcloud::install {
         refreshonly => true,
         subscribe   => Exec['occ maintenance:install'],
         logoutput   => $nextcloud::debug,
+        timeout     => $nextcloud::exec_timeout,
       }
 
       $convert_filecache_lock = "${nextcloud::datadir}/.puppet_convert_filecache.lock"
@@ -121,6 +123,7 @@ class nextcloud::install {
         refreshonly => true,
         subscribe   => Exec['occ maintenance:install'],
         logoutput   => $nextcloud::debug,
+        timeout   => $nextcloud::exec_timeout,
       }
     }
   }

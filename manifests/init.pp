@@ -66,6 +66,10 @@
 # @param debug
 #   Whether to enable additional output for debugging purposes.
 #
+# @param exec_timeout
+#   The maximum time exec resources should take. The timeout should be
+#   long enough to prevent premature termination of commands.
+#
 # @param hpb_app
 #   Specifies the name of the HPB app to be installed.
 #
@@ -196,6 +200,7 @@ class nextcloud (
   String $db_password,
   String $db_user,
   Boolean $debug,
+  Integer $exec_timeout,
   Enum['running', 'stopped'] $hpb_service_ensure,
   String $hpb_app,
   String $hpb_binary,

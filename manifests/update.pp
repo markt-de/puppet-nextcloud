@@ -34,6 +34,7 @@ class nextcloud::update {
           onlyif    => "test ! -f ${update_lock}",
           user      => $nextcloud::system_user,
           logoutput => $nextcloud::debug,
+          timeout   => $nextcloud::exec_timeout,
           require   => Nextcloud::Install::Distribution["update to ${nextcloud::version}"],
         }
       }
@@ -57,6 +58,7 @@ class nextcloud::update {
       cwd       => $nextcloud::symlink,
       onlyif    => $post_update_onlyif,
       logoutput => $nextcloud::debug,
+      timeout   => $nextcloud::exec_timeout,
     }
   }
 }

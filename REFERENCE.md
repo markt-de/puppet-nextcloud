@@ -160,6 +160,13 @@ Data type: `Boolean`
 
 Whether to enable additional output for debugging purposes.
 
+##### `exec_timeout`
+
+Data type: `Integer`
+
+The maximum time exec resources should take. The timeout should be
+long enough to prevent premature termination of commands.
+
 ##### `hpb_app`
 
 Data type: `String`
