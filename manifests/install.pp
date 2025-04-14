@@ -123,7 +123,7 @@ class nextcloud::install {
         refreshonly => true,
         subscribe   => Exec['occ maintenance:install'],
         logoutput   => $nextcloud::debug,
-        timeout   => $nextcloud::exec_timeout,
+        timeout     => $nextcloud::exec_timeout,
       }
     }
   }
