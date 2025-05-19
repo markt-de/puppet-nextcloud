@@ -18,9 +18,25 @@ class nextcloud::update {
     # Check if this is the designated update/install host.
     if (($nextcloud::update_host == undef or empty($nextcloud::update_host))
     or ($nextcloud::update_host == $facts['networking']['fqdn'])) {
+      # Fail update attempt if an old lock file can be found.
+      # This may indicate that a previous update (attempt) failed.
+      $old_lock_cmd = join([
+          'echo "ERROR: Lock file found, the previous update may have failed.',
+          'Please check this issue and remove the lock file.";',
+          'exit 1',
+      ], ' ')
+      $old_lock_onlyif_cmd = "test -f ${update_lock}"
+      exec { "ERROR: update lock found: ${update_lock}":
+        command => $old_lock_cmd,
+        path    => $nextcloud::path,
+        onlyif  => $old_lock_onlyif_cmd,
+        before  => Exec['post-update command'],
+      }
+
       # Get and prepare the distribution files
       nextcloud::install::distribution { "update to ${nextcloud::version}":
-        before => Exec['post-update command'],
+        before  => Exec['post-update command'],
+        require => Exec["ERROR: update lock found: ${update_lock}"],
       }
 
       # Only run occ commands if allowed to do so.
@@ -35,7 +51,10 @@ class nextcloud::update {
           user      => $nextcloud::system_user,
           logoutput => $nextcloud::debug,
           timeout   => $nextcloud::exec_timeout,
-          require   => Nextcloud::Install::Distribution["update to ${nextcloud::version}"],
+          require   => [
+            Exec["ERROR: update lock found: ${update_lock}"],
+            Nextcloud::Install::Distribution["update to ${nextcloud::version}"],
+          ],
         }
       }
     }
