@@ -33,6 +33,7 @@ define nextcloud::config_command (
         $cfg_key = $_key[1]
         $_occ_cmd = "config:${section}:delete"
         $_occ_args = $cfg_key
+        $_occ_args_redacted = $_occ_args
         $unless_cmd = join([
             "php occ config:${section}:get ${cfg_key}",
             # Modify the exit code to work with Exec's "unless".
@@ -44,13 +45,17 @@ define nextcloud::config_command (
         $_occ_cmd = "config:${section}:set"
         if ($value =~ Boolean) {
           $_occ_args = "${cfg_key} --value=${value} --type=boolean"
+          $_occ_args_redacted = $_occ_args
         } elsif ($value =~ Integer) {
           $_occ_args = "${cfg_key} --value=${value} --type=integer"
+          $_occ_args_redacted = $_occ_args
         } elsif ($value =~ Float) {
           $_occ_args = "${cfg_key} --value=${value} --type=float"
+          $_occ_args_redacted = $_occ_args
         } else {
-          # Everything else is a string.
+          # Everything else is a string, and may be a secret.
           $_occ_args = "${cfg_key} --value=\'${value}\'"
+          $_occ_args_redacted = "${cfg_key} --value='<REDACTED>'"
         }
         $unless_cmd = join([
             "php occ config:${section}:get",
@@ -71,12 +76,17 @@ define nextcloud::config_command (
         '; test $_exit -lt 1 && true', # pass failures to puppet
     ], ' ')
 
+    # Non-sensitive copy of the above, with any secret value replaced by a
+    # placeholder, so a failure of the exec below (whose command is redacted
+    # entirely) can still be debugged from the agent's log.
+    notice("nextcloud::config_command: running: php occ ${_occ_cmd} ${_occ_args_redacted}")
+
     # Run the config command.
     exec { "occ ${_occ_cmd} ${cfg_key}":
-      command   => $config_cmd,
+      command   => Sensitive($config_cmd),
       path      => $nextcloud::path,
       cwd       => $nextcloud::distribution_dir,
-      unless    => $unless_cmd,
+      unless    => Sensitive($unless_cmd),
       user      => $nextcloud::system_user,
       logoutput => $nextcloud::debug,
     }
