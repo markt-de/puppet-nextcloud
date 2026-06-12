@@ -69,9 +69,27 @@ class nextcloud::install {
           '; test $_exit -lt 1 && true', # pass failures to puppet
       ], ' ')
 
+      # Non-sensitive copy of the above, with secrets replaced by
+      # placeholders, so a failure of the exec below (whose command is
+      # redacted entirely) can still be debugged from the agent's log.
+      $install_cmd_redacted = join([
+          "touch ${install_lock}",
+          "&& php occ maintenance:install --database '${nextcloud::db_driver}'",
+          "--database-host ${nextcloud::db_host}",
+          "--database-name ${nextcloud::db_name}",
+          "--database-user ${nextcloud::db_user}",
+          '--database-pass <REDACTED>',
+          "--admin-user ${nextcloud::admin_user}",
+          '--admin-pass <REDACTED>',
+          "--data-dir ${nextcloud::datadir}",
+          "&& touch ${install_done}",
+          "&& touch ${update_done}",
+      ], ' ')
+      notice("nextcloud::install: running: ${install_cmd_redacted}")
+
       # Run the installation command.
       exec { 'occ maintenance:install':
-        command   => $install_cmd,
+        command   => Sensitive($install_cmd),
         path      => $nextcloud::path,
         cwd       => $nextcloud::distribution_dir,
         creates   => $install_done,
